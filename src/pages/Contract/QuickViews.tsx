@@ -24,7 +24,7 @@ const frameworks = [
 ];
 
 interface QuickViewProps {
-  triggerButton: React.ReactNode;
+  triggerButton: any;
 }
 
 const QuickViews: React.FC<QuickViewProps> = ({ triggerButton }) => {
