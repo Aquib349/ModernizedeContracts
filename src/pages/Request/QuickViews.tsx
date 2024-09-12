@@ -24,13 +24,17 @@ const frameworks = [
 ];
 
 interface QuickViewProps {
-  triggerButton: any;
+  triggerButton: React.ReactNode;
 }
 
 const QuickViews = ({ triggerButton }: QuickViewProps) => {
   return (
     <>
-      <MenuDropdown triggerButton={triggerButton} Data={frameworks} />
+      <MenuDropdown
+        triggerButton={triggerButton}
+        Data={frameworks}
+        required={false}
+      />
     </>
   );
 };
