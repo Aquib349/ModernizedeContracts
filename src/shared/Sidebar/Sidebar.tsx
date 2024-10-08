@@ -2,12 +2,6 @@ import { sideItem } from "@/constants/custom data/CustomData";
 import { ToggleMenuContext } from "@/context/SideMenuContext";
 import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const Sidebar = () => {
   const { isOpen } = useContext(ToggleMenuContext);
@@ -18,18 +12,24 @@ const Sidebar = () => {
     <>
       <div className="relative">
         <div
-          className={`fixed pt-10 transition-all duration-500 ease-in-out ${
+          className={`fixed pt-10 mt-3 transition-all duration-500 ease-in-out border-r-2 border-slate-200 ${
             isOpen ? "h-[100vh] overflow-hidden" : "h-0"
           } overflow-hidden`}
         >
           {sideItem.map((val, index) => {
-            const isActive = location.pathname === val.links;
+            const isActive =
+              location.pathname === val.links ||
+              (location.pathname.includes("contract-detail") &&
+                val.links === "/contracts")
+                ? "contracts"
+                : "";
 
             return (
               <div
                 key={val.id}
-                className={`flex flex-col my-6 text-slate-500 hover:text-blue-600 cursor-pointer
-              transition-all duration-500 ease-in-out transform 
+                title={val.name}
+                className={`flex flex-col my-3 text-slate-500 hover:text-blue-600 cursor-pointer
+              transition-all duration-500 ease-in-out transform mx-2
               ${
                 isOpen
                   ? `translate-y-0 opacity-100 delay-${index * 100}`
@@ -40,20 +40,25 @@ const Sidebar = () => {
                   navigate(val.links);
                 }}
               >
-                <TooltipProvider key={val.id}>
-                  <Tooltip>
-                    <TooltipTrigger
-                      className={`text-2xl rounded-md shadow bg-white w-10 flex justify-center items-center mx-2 p-2 mb-2 ${
-                        isActive ? "text-blue-600 font-bold bg-blue-50" : ""
-                      }`}
-                    >
-                      {val.icon}
-                    </TooltipTrigger>
-                    <TooltipContent className="absolute top-2 left-6 bg-gray-700 text-white">
-                      <p className="text-xs">{val.name}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <div
+                  className={`${
+                    isActive
+                      ? "border-2 border-blue-800 p-0.5 rounded-md"
+                      : "border-2 border-white/10 rounded-md p-0.5"
+                  }`}
+                >
+                  <span
+                    className={`text-xl rounded-md ${
+                      isActive
+                        ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+                        : "bg-blue-500"
+                    } p-1.5 text-white shadow flex justify-center items-center ${
+                      isActive ? "text-white font-bold" : ""
+                    }`}
+                  >
+                    {val.icon}
+                  </span>
+                </div>
               </div>
             );
           })}

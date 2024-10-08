@@ -9,8 +9,17 @@ import { Eye, SquareArrowDown } from "lucide-react";
 import QuickViews from "./QuickViews";
 import SavedViews from "./SaveViews";
 import MenuDropdown from "@/components/select dropdown/MenuDropdown";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-const SearchFilter = () => {
+const SearchFilter = ({ table }) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -49,18 +58,35 @@ const SearchFilter = () => {
             selected="Recently Updated"
             DataContent={[]}
           />
-          <MenuDropdown
-            triggerButton={
-              <Button className="space-x-2 h-9 bg-transparent border text-black hover:bg-gray-50">
-                <span className="">
-                  <HiAdjustmentsHorizontal />
-                </span>
-                <span className="">Filter</span>
-              </Button>
-            }
-            Data={[]}
-            required={false}
-          />
+          {table === "record" && (
+            <MenuDropdown
+              triggerButton={
+                <Button className="space-x-2 h-9 bg-transparent border text-black hover:bg-gray-50">
+                  <span className="">
+                    <HiAdjustmentsHorizontal />
+                  </span>
+                  <span className="">Filter</span>
+                </Button>
+              }
+              Data={[]}
+              required={false}
+            />
+          )}
+
+          {table === "document" && (
+            <Select>
+              <SelectTrigger className="w-[120px] h-9 font-medium">
+                <SelectValue placeholder="File Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="doc">Doc</SelectItem>
+                  <SelectItem value="pdf">Pdf</SelectItem>
+                  <SelectItem value="excel">Excel</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          )}
 
           <div className="flex space-x-2">
             <QuickViews

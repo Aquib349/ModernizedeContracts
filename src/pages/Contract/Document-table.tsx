@@ -14,10 +14,8 @@ import {
 import {
   ArrowUpDown,
   ChevronDown,
-  DatabaseZap,
+  FileText,
   MoreHorizontal,
-  NotepadTextDashed,
-  PersonStanding,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -41,13 +39,14 @@ import {
 } from "@/components/ui/table";
 import StatusColor from "@/constants/StatusColor";
 import {
-  contractData,
-  ContractRecords,
+  documentData,
+  DocumentRecords,
 } from "@/constants/custom data/CustomData";
-import ContractDetail from "./contract detail/ContractDetail";
 import { Link } from "react-router-dom";
+import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
+import IconSelector from "@/constants/file-icon-selector";
 
-export const columns: ColumnDef<ContractRecords>[] = [
+export const columns: ColumnDef<DocumentRecords>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -68,31 +67,34 @@ export const columns: ColumnDef<ContractRecords>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "contract_name",
+    accessorKey: "document_name",
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Contract Name
+        Document Name
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
     cell: ({ row }) => (
       <div className="lowercase cursor-pointer">
-        <Link to="/contract-detail">{row.getValue("contract_name")}</Link>
+        <Link to="#" className="flex items-center gap-2">
+          <IconSelector icon={row.getValue("document_name")} />
+          {row.getValue("document_name")}
+        </Link>
       </div>
     ),
   },
   {
-    accessorKey: "contract_no",
-    header: "Contract No.",
-    cell: ({ row }) => <div>{row.getValue("contract_no") || "-"}</div>,
+    accessorKey: "document_no",
+    header: "Document No.",
+    cell: ({ row }) => <div>{row.getValue("document_no") || "-"}</div>,
   },
   {
-    accessorKey: "contract_type",
-    header: "Contract Type",
-    cell: ({ row }) => <div>{row.getValue("contract_type") || "-"}</div>,
+    accessorKey: "document_type",
+    header: "Document Type",
+    cell: ({ row }) => <div>{row.getValue("document_type") || "-"}</div>,
   },
   {
     accessorKey: "status",
@@ -104,9 +106,9 @@ export const columns: ColumnDef<ContractRecords>[] = [
     ),
   },
   {
-    accessorKey: "date",
-    header: "Updated Date",
-    cell: ({ row }) => <div>{row.getValue("date") || "-"}</div>,
+    accessorKey: "date_uploaded",
+    header: "Uploaded Date",
+    cell: ({ row }) => <div>{row.getValue("date_uploaded") || "-"}</div>,
   },
   {
     id: "actions",
@@ -142,7 +144,7 @@ export const columns: ColumnDef<ContractRecords>[] = [
   },
 ];
 
-export default function RecordTable() {
+export default function DocumentTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -152,7 +154,7 @@ export default function RecordTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data: contractData,
+    data: documentData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

@@ -41,7 +41,7 @@ const Router = createBrowserRouter([
         element: <Contract />,
       },
       {
-        path: "contractDetail",
+        path: "contract-detail",
         element: <ContractDetail />,
       },
       {

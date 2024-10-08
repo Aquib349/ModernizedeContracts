@@ -32,23 +32,23 @@ const ContractInfo = () => {
         </Modal>
       )}
 
-      <div className="p-3">
-        <div className="flex gap-2">
+      <div className="px-8 py-4 border mt-8 bg-white rounded ml-[5rem]">
+        <div className="flex items-center gap-2">
           <div title="Folder Open">
-            <FolderOpenDot size={28} />
+            <FolderOpenDot size={40} />
           </div>
-          <h4 className="text-xl font-medium">
+          <h4 className="text-2xl font-medium">
             1000 records with 14 column 7th JUNE 2024
           </h4>
         </div>
-        <p className="mb-3 mt-1 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <p className="mb-3 mt-2 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           This Sales Agreement is between MED-EL Corporation and University
           Hospitals Health System, Inc. for the purchase of specific Hearing
           Technology Solutions referred to as 'Products,' which includes
           products, related services, and the rights transferred by MED-EL in
           performance of this Agreement"
         </p>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center pt-1">
           <div className="text-sm flex items-center gap-1">
             <div title="Contract Owner">
               <UsersRound size={16} />
@@ -68,7 +68,6 @@ const ContractInfo = () => {
             <p>$0.00</p>
           </div>
         </div>
-
         <div className="flex items-center pt-4">
           {Labels.length > 0 ? (
             <div className="flex items-center gap-2">
