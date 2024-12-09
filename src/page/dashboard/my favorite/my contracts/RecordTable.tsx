@@ -44,7 +44,6 @@ import {
   contractData,
   ContractRecords,
 } from "@/constants/custom data/CustomData";
-import ContractDetail from "./contract detail/ContractDetail";
 import { Link } from "react-router-dom";
 
 export const columns: ColumnDef<ContractRecords>[] = [
@@ -80,7 +79,7 @@ export const columns: ColumnDef<ContractRecords>[] = [
     ),
     cell: ({ row }) => (
       <div className="lowercase cursor-pointer">
-        <Link to="/contract-detail">{row.getValue("contract_name")}</Link>
+        <Link to="/contractSummary">{row.getValue("contract_name")}</Link>
       </div>
     ),
   },

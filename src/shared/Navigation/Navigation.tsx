@@ -6,12 +6,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { NavItems } from "@/constants/custom data/CustomData";
-import { useContext } from "react";
-import { ToggleMenuContext } from "@/context/SideMenuContext";
-
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -19,21 +14,14 @@ import {
 } from "@/components/ui/popover";
 import WebNavigation from "./web-navigation";
 import AppNavigation from "./app-navigation";
-import { AlignJustify } from "lucide-react";
+import { AlignJustify, ChartPie } from "lucide-react";
 
 const Navigation = () => {
-  const { toggleSideMenu } = useContext(ToggleMenuContext);
   return (
     <>
       <nav className="navigation relative">
-        <div className="fixed bg-white w-full top-0 flex justify-between items-center p-1.5 shadow-sm shadow-black/10 z-50">
+        <div className="fixed bg-white w-full top-0 flex h-14 justify-between items-center p-1.5 shadow-sm shadow-black/10 z-50">
           <div className="logo flex items-center gap-x-2">
-            {/* <div
-              className="text-2xl font-bold cursor-pointer pl-2"
-              onClick={toggleSideMenu}
-            >
-              <AlignJustify />
-            </div> */}
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -43,7 +31,7 @@ const Navigation = () => {
                   <TbGridDots />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-[35rem] ml-2 bg-black/90 rounded-xl">
+              <PopoverContent className="w-[35rem] ml-2 bg-black rounded-xl">
                 {/* navigations */}
                 <div className="grid grid-cols-5">
                   <div className="col-span-3 border-r mr-4">
@@ -61,6 +49,7 @@ const Navigation = () => {
               alt="eContract Logo"
             />
           </div>
+
           <div className="nav-list flex items-center">
             {NavItems.map((val) => (
               <TooltipProvider key={val.id}>

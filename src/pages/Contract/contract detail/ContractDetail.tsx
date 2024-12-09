@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import ContractSidebar from "./contract-detail-sidebar";
 import GeneratedComponent from "./generated-component";
 import ContractStatus from "../contract status/contract-status";
+import TaskAndNextStep from "../task and next steps/task-next-step";
 
 // Define the Section interface
 interface Section {
@@ -25,6 +26,18 @@ const ContractDetail = () => {
   const [sections, setSections] = useState<Section[]>([
     { id: 1, name: "Summary" },
   ]);
+
+  // Function to remove the generated component
+  function removeComponent(id: number) {
+    setSections((prevSections) =>
+      prevSections.filter((val) => {
+        if (val.name?.toLowerCase() === "summary") {
+          return true;
+        }
+        return val.id !== id;
+      })
+    );
+  }
 
   return (
     <>
@@ -51,15 +64,24 @@ const ContractDetail = () => {
           </Breadcrumb>
         </div>
         <ContractSidebar sections={sections} setSections={setSections} />
-        <ContractInfo />
+        <div className="px-12">
+          <ContractInfo />
 
-        <div className="mt-4 grid grid-cols-6 gap-2">
-          <div className="col-span-4">
-            {sections.map((section) => (
-              <GeneratedComponent key={section.id} section={section} />
-            ))}
+          <div className="grid grid-cols-6 gap-2">
+            <div className="col-span-4">
+              {sections.map((section) => (
+                <GeneratedComponent
+                  key={section.id}
+                  section={section}
+                  removeComponent={removeComponent}
+                />
+              ))}
+            </div>
+            <div className="col-span-2">
+              <ContractStatus />
+              <TaskAndNextStep />
+            </div>
           </div>
-          <div className="col-span-2"><ContractStatus/></div>
         </div>
       </div>
     </>

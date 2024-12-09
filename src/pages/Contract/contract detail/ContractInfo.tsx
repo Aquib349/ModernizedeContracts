@@ -22,17 +22,7 @@ const ContractInfo = () => {
 
   return (
     <>
-      {showModal && (
-        <Modal
-          heading={LabelMode}
-          toggleModal={toggleModal}
-          set_Width={"medium"}
-        >
-          Hi
-        </Modal>
-      )}
-
-      <div className="px-8 py-4 border mt-8 bg-white rounded ml-[5rem]">
+      <div className="py-4 mt-4 rounded ml-[5rem]">
         <div className="flex items-center gap-2">
           <div title="Folder Open">
             <FolderOpenDot size={40} />
@@ -41,7 +31,7 @@ const ContractInfo = () => {
             1000 records with 14 column 7th JUNE 2024
           </h4>
         </div>
-        <p className="mb-3 mt-2 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        {/* <p className="mb-3 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           This Sales Agreement is between MED-EL Corporation and University
           Hospitals Health System, Inc. for the purchase of specific Hearing
           Technology Solutions referred to as 'Products,' which includes
@@ -109,7 +99,7 @@ const ContractInfo = () => {
               <p className="text-sm pl-2">Add Labels</p>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );

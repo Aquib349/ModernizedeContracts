@@ -10,7 +10,7 @@ import { LiaFileContractSolid } from "react-icons/lia";
 import { BsUiChecks } from "react-icons/bs";
 
 export const NavItems = [
-  { id: 1, name: "Tasks", icon: <AiOutlineBars /> },
+  // { id: 1, name: "Tasks", icon: <AiOutlineBars /> },
   { id: 2, name: "Alerts", icon: <SlBell /> },
   { id: 3, name: "Bookmarks", icon: <IoBookmarkOutline /> },
   { id: 4, name: "Help Documents", icon: <FaRegCircleQuestion /> },
@@ -21,22 +21,19 @@ export const sideItem = [
   { id: 1, name: "Dashboard", icon: <MdSpaceDashboard />, links: "/" },
   {
     id: 2,
-    name: "Requests",
+    name: "Business Area Dashboard",
     icon: <FaRegHandPointer />,
-    links: "/requests",
   },
-  { id: 3, name: "Pipeline", icon: <TbBrandDatabricks />, links: "/pipeline" },
+  { id: 3, name: "Pipeline", icon: <TbBrandDatabricks /> },
   {
     id: 4,
     name: "Contracts",
     icon: <LiaFileContractSolid />,
-    links: "/contracts",
   },
   {
     id: 5,
     name: "Activities",
     icon: <BsUiChecks />,
-    links: "/activities",
   },
 ];
 
@@ -345,12 +342,12 @@ export const documentData: DocumentRecords[] = [
 export const contractDetailNavigation = [
   { id: 1, name: "Summary" },
   { id: 2, name: "Documents" },
-  { id: 3, name: "Activity" },
-  { id: 4, name: "Issues" },
+  { id: 3, name: "Metdata" },
+  { id: 4, name: "People and Permissions" },
   { id: 5, name: "Amendments" },
   { id: 6, name: "Clauses" },
   { id: 7, name: "Obligations" },
   { id: 8, name: "Correspondence" },
   { id: 9, name: "Compliance" },
-  { id: 10, name: "Notes" },
+  { id: 10, name: "Related Projects" },
 ];

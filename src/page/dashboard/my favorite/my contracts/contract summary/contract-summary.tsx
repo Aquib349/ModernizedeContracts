@@ -1,0 +1,116 @@
+import { useContext } from "react";
+import { History } from "lucide-react";
+import ToggleView from "@/components/ai-toggle-view/toggle-view";
+import ContractLifeCycle from "./list-view/contract-life-cycle";
+import AcitivityPlan from "./list-view/activity-plan";
+import ReviewInsights from "./list-view/review-insights";
+import ContractHighLights from "./list-view/contract-highlights";
+import ActivityTimeline from "./list-view/activity-timeline";
+import { ViewContext } from "@/context/viewContext";
+import ToggleButton from "@/components/ai-toggle-view/toggle-button";
+import ContractLifeCycleGraph from "./graphical-view/contract-life-cycle-chart";
+import ActivityPlanGraph from "./graphical-view/activity-plan";
+import ReviewInsightsGraph from "./graphical-view/review-insights";
+import ReviewInsightsTabular from "./tabular-view/review-insights";
+
+const ContractSummary: React.FC = () => {
+  const { getView } = useContext(ViewContext);
+  return (
+    <>
+      <div className="contract-summary space-y-2">
+        <ToggleView heading={"AI Generated Contract Summary"} />
+
+        {/* list view summary */}
+
+        <div className="text-sm">
+          <div className="bg-white p-4 rounded-md text-gray-500">
+            <p className="italic text-slate-500 text-xs flex items-center gap-1">
+              <History size={16} className="cursor-pointer" />
+              Time Since Last Update: 2 hours ago
+            </p>
+            <div className="flex items-center gap-x-3">
+              <span className="font-medium w-1/6">Contract Title:</span>
+              <p className="text-left flex-grow">
+                Aviation Planning Consulting Services for Chicago O'Hare
+              </p>
+            </div>
+            <div className="flex items-center gap-x-3">
+              <span className="font-medium w-1/6">Contract Type:</span>
+              <p className="text-left flex-grow">Consulting Agreement</p>
+            </div>
+            <div className="flex items-center gap-x-3">
+              <span className="font-medium w-1/6">Counterparty:</span>
+              <p className="text-left flex-grow">Chicago O'Hare Airport</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Contract Life Cycle */}
+        <div className="bg-white p-4 rounded-md">
+          <ToggleButton
+            title="Lifecycle Progress Bar"
+            componentKey="contractLifeCycle"
+            Allviews={false}
+          />
+          {getView("contractLifeCycle") === "list" ? (
+            <ContractLifeCycle />
+          ) : (
+            <ContractLifeCycleGraph />
+          )}
+        </div>
+
+        {/* Activity Plan */}
+        <div className="bg-white p-4 rounded-md">
+          <ToggleButton
+            title="Activity Plan"
+            componentKey="activityPlan"
+            Allviews={false}
+          />
+          {getView("activityPlan") === "list" ? (
+            <AcitivityPlan />
+          ) : (
+            <ActivityPlanGraph />
+          )}
+        </div>
+
+        {/* Review Insights */}
+        <div className="bg-white p-4 rounded-md">
+          <ToggleButton
+            title="Review Insights"
+            componentKey="reviewInsights"
+            Allviews={true}
+          />
+          {getView("reviewInsights") === "list" ? (
+            <ReviewInsights />
+          ) : getView("reviewInsights") === "graph" ? (
+            <ReviewInsightsGraph />
+          ) : (
+            <ReviewInsightsTabular />
+          )}
+        </div>
+
+        {/* Contract Highlights */}
+        <div className="bg-white p-4 rounded-md">
+          <ToggleButton
+            title="Contract Highlights"
+            componentKey="contractHighlights"
+            Allviews={false}
+          />
+          <ContractHighLights />
+        </div>
+
+        {/* Activity Timeline */}
+        <div className="bg-white p-4 rounded-md">
+          <ToggleButton
+            title="Activity Timeline"
+            componentKey="activityTimeline"
+            Allviews={false}
+          />
+          <ActivityTimeline />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ContractSummary;

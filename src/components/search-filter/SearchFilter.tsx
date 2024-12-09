@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const SearchFilter = ({ table }) => {
+const SearchFilter = ({ placeholder }: { placeholder: string }) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -48,17 +48,17 @@ const SearchFilter = ({ table }) => {
         <div className="main flex space-x-2">
           <Input
             type="search"
-            placeholder="search contract records..."
-            className="h-9 w-1/4"
+            placeholder={placeholder}
+            className="h-9 w-2/4"
           />
-          <DropdownItem
+          {/* <DropdownItem
             className="h-9 w-[200px] font-medium"
             placeholder="Recently Updated"
             icon={<></>}
             selected="Recently Updated"
             DataContent={[]}
-          />
-          {table === "record" && (
+          /> */}
+          {/* {table === "record" && (
             <MenuDropdown
               triggerButton={
                 <Button className="space-x-2 h-9 bg-transparent border text-black hover:bg-gray-50">
@@ -71,9 +71,9 @@ const SearchFilter = ({ table }) => {
               Data={[]}
               required={false}
             />
-          )}
+          )} */}
 
-          {table === "document" && (
+          {/* {table === "document" && (
             <Select>
               <SelectTrigger className="w-[120px] h-9 font-medium">
                 <SelectValue placeholder="File Type" />
@@ -86,9 +86,9 @@ const SearchFilter = ({ table }) => {
                 </SelectGroup>
               </SelectContent>
             </Select>
-          )}
+          )} */}
 
-          <div className="flex space-x-2">
+          {/* <div className="flex space-x-2">
             <QuickViews
               triggerButton={
                 <ToolTip
@@ -107,7 +107,7 @@ const SearchFilter = ({ table }) => {
                 />
               }
             />
-          </div>
+          </div> */}
           <Button
             onClick={handleClick}
             className="bg-transparent border text-lg text-slate-400 h-9 hover:bg-gray-50"
