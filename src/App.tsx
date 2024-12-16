@@ -2,18 +2,17 @@ import { Outlet, createBrowserRouter } from "react-router-dom";
 import { ToggleMenuContextProvider } from "./context/SideMenuContext";
 import Navigation from "./shared/Navigation/Navigation";
 import Sidebar from "./shared/Sidebar/Sidebar";
-// import Dashboard from "./pages/Dashboard/Dashboard";
-import Request from "./pages/Request/Request";
-import Activities from "./pages/Activity/Activities";
-import Pipeline from "./pages/Pipeline/Pipeline";
-import ContractDetail from "./pages/Contract/contract detail/ContractDetail";
-import Dashboard from "./page/dashboard/Dashboard";
-import { ActiveContextProvider } from "./context/activeContext";
-import ContractSummary from "./page/dashboard/my favorite/my contracts/contract summary/contract-summary";
-import Page from "./page/dashboard/my work/ai response/page";
-import DocumentTable from "./page/dashboard/my favorite/my documents/Document-table";
-import Contract from "./page/dashboard/my favorite/my contracts/Contract";
 import { ViewContextProvider } from "./context/viewContext";
+import { ActiveContextProvider } from "./context/activeContext";
+import Dashboard from "./page/dashboard/Dashboard";
+import Page from "./page/dashboard/my priority/ai response/page";
+import Contract from "./page/dashboard/my favorite/my contracts/Contract";
+import DocumentTable from "./page/dashboard/my favorite/my documents/Document-table";
+import ContractSummary from "./page/dashboard/my favorite/my contracts/contract summary/contract-summary";
+import Calendar from "./page/dashboard/my calendar/calendar";
+import CalendarList from "./page/dashboard/my calendar/list view/my-calendar-list";
+import CalendarView from "./page/dashboard/my calendar/calendar view/my-calendar-calendar";
+import DocumentUpload from "./page/dashboard/my favorite/my documents/document-upload";
 
 function App() {
   return (
@@ -49,6 +48,20 @@ const Router = createBrowserRouter([
             element: <Page />,
           },
           {
+            path: "calendar",
+            element: <Calendar />,
+            children: [
+              {
+                path: "/calendar/calendar-summary",
+                element: <CalendarList />,
+              },
+              {
+                path: "/calendar",
+                element: <CalendarView />,
+              },
+            ],
+          },
+          {
             path: "contracts",
             element: <Contract />,
           },
@@ -57,10 +70,18 @@ const Router = createBrowserRouter([
             element: <DocumentTable />,
           },
           {
+            path: "document-upload",
+            element: <DocumentUpload />,
+          },
+          {
             path: "contractSummary",
             element: <ContractSummary />,
           },
         ],
+      },
+      {
+        path: "/business-area",
+        // import the element => created compnent ex: Business Area Components
       },
     ],
   },

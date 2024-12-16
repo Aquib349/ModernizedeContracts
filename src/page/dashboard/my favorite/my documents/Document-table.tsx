@@ -11,12 +11,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  ChevronDown,
-  FileText,
-  MoreHorizontal,
-} from "lucide-react";
+import { ArrowUpDown, ChevronDown, MoreHorizontal, Upload } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -43,7 +38,6 @@ import {
   DocumentRecords,
 } from "@/constants/custom data/CustomData";
 import { Link } from "react-router-dom";
-import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
 import IconSelector from "@/constants/file-icon-selector";
 import SearchFilter from "@/components/search-filter/SearchFilter";
 
@@ -177,7 +171,12 @@ export default function DocumentTable() {
     <div className="main p-3 shadow text-sm bg-white relative">
       <SearchFilter placeholder="search document" />
       <div className="w-full">
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 flex gap-1 items-center">
+          <Link to="/document-upload">
+            <Button variant="outline" className="h-9">
+              <Upload size={16} />
+            </Button>
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="h-9">

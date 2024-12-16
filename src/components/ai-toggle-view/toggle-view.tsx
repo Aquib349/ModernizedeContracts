@@ -8,7 +8,7 @@ interface ToggleViewProps {
 }
 
 const ToggleView: React.FC<ToggleViewProps> = ({ heading }) => {
-  const { view, setView } = useContext(ViewContext);
+  // const { view, setView } = useContext(ViewContext);
   return (
     <>
       <div className="bg-white rounded my-2">

@@ -1,0 +1,153 @@
+import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { z } from "zod";
+import { Input } from "../ui/input";
+import { FieldPath, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { useState } from "react";
+import { FormFieldNames } from "@/types";
+
+interface EventsProps {
+  triggerButton: React.ReactNode;
+}
+
+const formSchema = z
+  .object({
+    event_name: z.string().min(2).max(50),
+    description: z.string().min(2).max(200),
+    stay_duration: z.string().optional(),
+    start_time: z
+      .string()
+      .regex(/^\d{2}:\d{2}$/, { message: "HH:mm format required" }),
+    end_time: z
+      .string()
+      .regex(/^\d{2}:\d{2}$/, { message: "HH:mm format required" }),
+  })
+  .refine(
+    (data) => {
+      const [startHour, startMinute] = data.start_time.split(":").map(Number);
+      const [endHour, endMinute] = data.end_time.split(":").map(Number);
+
+      return endHour * 60 + endMinute > startHour * 60 + startMinute;
+    },
+    {
+      message: "End time must be later than start time",
+      path: ["end_time"],
+    }
+  );
+
+const calculateDuration = (startTime: string, endTime: string) => {
+  const [startHour, startMinute] = startTime.split(":").map(Number);
+  const [endHour, endMinute] = endTime.split(":").map(Number);
+
+  const startTotalMinutes = startHour * 60 + startMinute;
+  const endTotalMinutes = endHour * 60 + endMinute;
+
+  const diffMinutes = endTotalMinutes - startTotalMinutes;
+  const hours = Math.floor(diffMinutes / 60);
+  const minutes = diffMinutes % 60;
+
+  return `${hours}h ${minutes}min`;
+};
+
+const AddEvents = ({ triggerButton }: EventsProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      event_name: "",
+      description: "",
+      stay_duration: "",
+      start_time: "",
+      end_time: "",
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    const stayDuration = calculateDuration(data.start_time, data.end_time);
+    const newData = { ...data, stay_duration: stayDuration };
+
+    console.log(newData);
+    setIsOpen(false);
+  };
+
+  const fieldNames: FormFieldNames[] = [
+    "event_name",
+    "description",
+    "start_time",
+    "end_time",
+  ];
+
+  return (
+    <>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <div onClick={() => setIsOpen(true)}>{triggerButton}</div>
+        </DialogTrigger>
+
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Add Events</DialogTitle>
+          </DialogHeader>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              {["event_name", "description", "start_time", "end_time"].map(
+                (field: string) => (
+                  <FormField
+                    key={field}
+                    control={form.control}
+                    name={field as FieldPath<z.infer<typeof formSchema>>}
+                    render={({ field: inputField }) => (
+                      <FormItem>
+                        <FormLabel>
+                          {field.replace("_", " ").toUpperCase()}
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder={`Enter ${field.replace("_", " ")}`}
+                            type={field.includes("time") ? "time" : "text"}
+                            {...inputField}
+                          />
+                        </FormControl>
+                        <FormDescription className="text-xs">
+                          {`Provide ${field.replace("_", " ")} details.`}
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )
+              )}
+
+              <DialogFooter>
+                <Button type="submit" className="bg-blue-500 text-xs">
+                  Save Event
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
+export default AddEvents;

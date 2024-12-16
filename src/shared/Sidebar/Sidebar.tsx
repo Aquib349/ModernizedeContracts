@@ -1,12 +1,12 @@
 import { sideItem } from "@/constants/custom data/CustomData";
 import { ToggleMenuContext } from "@/context/SideMenuContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const { isOpen } = useContext(ToggleMenuContext);
   const navigate = useNavigate();
-  const location = useLocation();
+  const [sideNavactive, setSideNavActive] = useState<string>("/");
 
   return (
     <>
@@ -18,8 +18,8 @@ const Sidebar = () => {
         >
           {sideItem.map((val, index) => {
             const isActive =
-              location.pathname === val.links ||
-              (location.pathname.includes("contract-detail") &&
+              sideNavactive === val.links ||
+              (sideNavactive.includes("contract-detail") &&
                 val.links === "/contracts")
                 ? "contracts"
                 : "";
@@ -38,6 +38,7 @@ const Sidebar = () => {
                 style={{ transitionDelay: `${index * 100}ms` }}
                 onClick={() => {
                   navigate(val.links);
+                  setSideNavActive(val.links);
                 }}
               >
                 <div

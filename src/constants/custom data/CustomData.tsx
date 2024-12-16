@@ -7,7 +7,8 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { FaRegHandPointer } from "react-icons/fa";
 import { TbBrandDatabricks } from "react-icons/tb";
 import { LiaFileContractSolid } from "react-icons/lia";
-import { BsUiChecks } from "react-icons/bs";
+import { BsCalendar2Month, BsUiChecks } from "react-icons/bs";
+import { CalendarDays, CalendarRange } from "lucide-react";
 
 export const NavItems = [
   // { id: 1, name: "Tasks", icon: <AiOutlineBars /> },
@@ -23,17 +24,7 @@ export const sideItem = [
     id: 2,
     name: "Business Area Dashboard",
     icon: <FaRegHandPointer />,
-  },
-  { id: 3, name: "Pipeline", icon: <TbBrandDatabricks /> },
-  {
-    id: 4,
-    name: "Contracts",
-    icon: <LiaFileContractSolid />,
-  },
-  {
-    id: 5,
-    name: "Activities",
-    icon: <BsUiChecks />,
+    link: "/business-area",
   },
 ];
 
@@ -350,4 +341,16 @@ export const contractDetailNavigation = [
   { id: 8, name: "Correspondence" },
   { id: 9, name: "Compliance" },
   { id: 10, name: "Related Projects" },
+];
+
+export const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+export const viewOptions = [
+  { key: "day", icon: <CalendarDays size={12} />, label: "Day" },
+  { key: "week", icon: <CalendarRange size={12} />, label: "Week" },
+  {
+    key: "month",
+    icon: <BsCalendar2Month className="text-xs" />,
+    label: "Month",
+  },
 ];
