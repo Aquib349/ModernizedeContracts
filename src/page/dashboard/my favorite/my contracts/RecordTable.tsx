@@ -40,10 +40,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import StatusColor from "@/constants/StatusColor";
-import {
-  contractData,
-  ContractRecords,
-} from "@/constants/custom data/CustomData";
+import { contractData, ContractRecords } from "@/constants/CustomData";
 import { Link } from "react-router-dom";
 
 export const columns: ColumnDef<ContractRecords>[] = [

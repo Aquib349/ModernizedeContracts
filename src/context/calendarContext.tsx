@@ -1,10 +1,18 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import dayjs from "dayjs";
+import { AddEvents, deleteEvent, GetEvents } from "@/services/calendar.service";
 
 interface contextProps {
   currentDate: dayjs.Dayjs;
   view: string;
   events: {
+    id: string;
     event_name: string;
     description: string;
     stay_duration: string;
@@ -21,6 +29,7 @@ interface contextProps {
   goToNext: () => void;
   goToPrevious: () => void;
   changeView: (newView: string) => void;
+  deleteEvents: (id: string) => void;
 }
 
 const CalendarContext = createContext<contextProps | undefined>(undefined);
@@ -30,18 +39,21 @@ export const CalendarContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [view, setView] = useState<"day" | "week" | "month">("month");
-  const [events, setEvents] = useState<
-    {
-      event_name: string;
-      description: string;
-      stay_duration: string;
-      start_time: string;
-      end_time: string;
-    }[]
-  >([]);
+  const [events, setEvents] = useState([]);
 
-  const onEventClick = (event: any) => {
-    setEvents(event);
+  const onEventClick = async (event: any) => {
+    await AddEvents(event);
+    GetAllEvents();
+  };
+
+  function GetAllEvents() {
+    const data = GetEvents();
+    setEvents(data);
+  }
+
+  const deleteEvents = async (id: string) => {
+    const leftEvents = deleteEvent(id);
+    setEvents(leftEvents);
   };
 
   const goToNext = () => {
@@ -67,6 +79,11 @@ export const CalendarContextProvider: React.FC<{ children: ReactNode }> = ({
   const changeView = (newView: "day" | "week" | "month") => {
     setView(newView);
   };
+
+  useEffect(() => {
+    GetAllEvents();
+  }, []);
+
   return (
     <CalendarContext.Provider
       value={{
@@ -77,6 +94,7 @@ export const CalendarContextProvider: React.FC<{ children: ReactNode }> = ({
         goToNext,
         goToPrevious,
         changeView,
+        deleteEvents,
       }}
     >
       {children}

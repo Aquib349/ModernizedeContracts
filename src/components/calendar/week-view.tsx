@@ -70,12 +70,16 @@ const WeekView = ({ currentDate, events, onEventClick }: weekProps) => {
               >
                 <AddEvents
                   triggerButton={
-                    <div className="absolute inset-0 flex justify-center items-center cursor-pointer hover:bg-blue-200">
+                    <div
+                      className="absolute inset-0 flex justify-center items-center cursor-pointer 
+                    hover:bg-gradient-to-r hover:from-indigo-100 hover:via-purple-100 hover:to-pink-100"
+                    >
                       <span className="hidden group-hover:block text-xs text-blue-600">
                         + Add Event
                       </span>
                     </div>
                   }
+                  onEventClick={onEventClick}
                 />
               </div>
             ))}

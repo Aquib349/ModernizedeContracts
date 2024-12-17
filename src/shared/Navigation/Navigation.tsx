@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { NavItems } from "@/constants/custom data/CustomData";
+import { NavItems } from "@/constants/CustomData";
 import { Button } from "@/components/ui/button";
 import {
   Popover,

@@ -14,17 +14,24 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "../ui/form";
 import { useState } from "react";
-import { FormFieldNames } from "@/types";
+import { IdGenerator } from "@/constants/id-generator";
 
 interface EventsProps {
   triggerButton: React.ReactNode;
+  onEventClick: (event: {
+    id: string;
+    event_name: string;
+    description: string;
+    stay_duration: string;
+    start_time: string;
+    end_time: string;
+  }) => void;
 }
 
 const formSchema = z
@@ -66,7 +73,7 @@ const calculateDuration = (startTime: string, endTime: string) => {
   return `${hours}h ${minutes}min`;
 };
 
-const AddEvents = ({ triggerButton }: EventsProps) => {
+const AddEvents = ({ triggerButton, onEventClick }: EventsProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -82,18 +89,18 @@ const AddEvents = ({ triggerButton }: EventsProps) => {
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     const stayDuration = calculateDuration(data.start_time, data.end_time);
-    const newData = { ...data, stay_duration: stayDuration };
+    const newData = {
+      id: IdGenerator(),
+      event_name: data.event_name ?? "",
+      description: data.description ?? "",
+      start_time: data.start_time ?? "",
+      end_time: data.end_time ?? "",
+      stay_duration: stayDuration,
+    };
 
-    console.log(newData);
+    onEventClick(newData);
     setIsOpen(false);
   };
-
-  const fieldNames: FormFieldNames[] = [
-    "event_name",
-    "description",
-    "start_time",
-    "end_time",
-  ];
 
   return (
     <>
@@ -127,9 +134,6 @@ const AddEvents = ({ triggerButton }: EventsProps) => {
                             {...inputField}
                           />
                         </FormControl>
-                        <FormDescription className="text-xs">
-                          {`Provide ${field.replace("_", " ")} details.`}
-                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}

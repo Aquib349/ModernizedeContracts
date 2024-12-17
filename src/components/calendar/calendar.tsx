@@ -4,7 +4,7 @@ import MonthView from "./month-view";
 import WeekView from "./week-view";
 import DayView from "./day-view";
 import { useCalendar } from "@/context/calendarContext";
-import { viewOptions } from "@/constants/custom data/CustomData";
+import { viewOptions } from "@/constants/CustomData";
 
 const Calendar = () => {
   const {
@@ -15,10 +15,12 @@ const Calendar = () => {
     goToNext,
     goToPrevious,
     changeView,
+    deleteEvents,
   } = useCalendar();
 
   const renderViewButton = ({ key, icon, label }) => (
     <Button
+      key={key}
       onClick={() => changeView(key)}
       className={`h-9 text-xs px-4 space-x-1 ${
         view === key ? "bg-blue-600 text-white" : ""
@@ -88,6 +90,7 @@ const Calendar = () => {
             currentDate={currentDate}
             events={events}
             onEventClick={onEventClick}
+            deleteEvents={deleteEvents}
           />
         )}
       </div>

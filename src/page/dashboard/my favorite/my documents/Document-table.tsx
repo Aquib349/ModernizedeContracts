@@ -33,10 +33,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import StatusColor from "@/constants/StatusColor";
-import {
-  documentData,
-  DocumentRecords,
-} from "@/constants/custom data/CustomData";
+import { documentData, DocumentRecords } from "@/constants/CustomData";
 import { Link } from "react-router-dom";
 import IconSelector from "@/constants/file-icon-selector";
 import SearchFilter from "@/components/search-filter/SearchFilter";

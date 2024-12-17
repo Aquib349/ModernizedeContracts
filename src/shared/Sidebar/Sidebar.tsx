@@ -1,4 +1,4 @@
-import { sideItem } from "@/constants/custom data/CustomData";
+import { sideItem } from "@/constants/CustomData";
 import { ToggleMenuContext } from "@/context/SideMenuContext";
 import { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";

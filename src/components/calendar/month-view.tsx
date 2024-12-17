@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { dayNames } from "@/constants/custom data/CustomData";
+import { dayNames } from "@/constants/CustomData";
 import AddEvents from "./add-events";
 
 interface CalendarProps {
@@ -51,7 +51,7 @@ const MonthView: React.FC<CalendarProps> = ({
       <div className="grid grid-cols-7 gap-2">
         {monthDays.map((date) => {
           // Filter events that match the current date
-          const dayEvents = events.filter(
+          const dayEvents = events?.filter(
             (event) =>
               dayjs(event.start_time).isSame(date, "day") ||
               dayjs(event.end_time).isSame(date, "day")
@@ -65,7 +65,7 @@ const MonthView: React.FC<CalendarProps> = ({
               <span>{date.date()}</span>
 
               {/* Render Events */}
-              {dayEvents.length > 0 && (
+              {dayEvents?.length > 0 && (
                 <div className="mt-1">
                   {dayEvents.map((event, idx) => (
                     <button
@@ -82,10 +82,14 @@ const MonthView: React.FC<CalendarProps> = ({
               {/* Add Events Button */}
               <AddEvents
                 triggerButton={
-                  <div className="absolute inset-0 flex justify-center items-center cursor-pointer hover:bg-blue-100 rounded text-white hover:text-blue-600">
+                  <div
+                    className="absolute inset-0 flex justify-center items-center cursor-pointer 
+                  hover:bg-gradient-to-r hover:from-indigo-100 hover:via-purple-100 hover:to-pink-100 rounded text-white hover:text-blue-600"
+                  >
                     <span className="text-xs">+ Add Event</span>
                   </div>
                 }
+                onEventClick={onEventClick}
               />
             </div>
           );
