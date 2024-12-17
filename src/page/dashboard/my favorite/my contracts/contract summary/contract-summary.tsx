@@ -13,7 +13,30 @@ import ActivityPlanGraph from "./graphical-view/activity-plan";
 import ReviewInsightsGraph from "./graphical-view/review-insights";
 import ReviewInsightsTabular from "./tabular-view/review-insights";
 
+
 const ContractSummary: React.FC = () => {
+  // Define table columns
+  const columns = [
+    { header: "Category", key: "category" },
+    { header: "Details", key: "details", render: (details) => <div>{details}</div> },
+  ];
+
+  // Define table data
+  const data = [
+    {
+      category: "Primary Reviewers",
+      details: "Rick, Lisa, Mike (Counterparty)",
+    },
+    {
+      category: "Documents Being Reviewed",
+      details: (
+        <>
+          <p>Draft Contract Agreement v2.3 (Updated February 10, 2024)</p>
+          <p>Scope of Work v3.0 (Last Updated March 1, 2024)</p>
+        </>
+      ),
+    },
+  ];
   const { getView } = useContext(ViewContext);
   return (
     <>
@@ -46,7 +69,7 @@ const ContractSummary: React.FC = () => {
         </div>
 
         {/* Contract Life Cycle */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-white p-4 rounded-md mt-2">
           <ToggleButton
             title="Lifecycle Progress Bar"
             componentKey="contractLifeCycle"
@@ -85,7 +108,7 @@ const ContractSummary: React.FC = () => {
           ) : getView("reviewInsights") === "graph" ? (
             <ReviewInsightsGraph />
           ) : (
-            <ReviewInsightsTabular />
+            <ReviewInsightsTabular columns={columns} data={data} />
           )}
         </div>
 

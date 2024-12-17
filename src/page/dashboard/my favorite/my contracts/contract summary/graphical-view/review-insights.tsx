@@ -9,6 +9,7 @@ function ReviewInsightsGraph() {
           title="Clause Status"
           series={[2, 1]}
           labels={["Approved Clauses", "Under Review Clauses"]}
+          colors={["#50CD9E", "#FDC489"]} // Custom colors
         />
         <BarChart
           title="Non-Standard/High-Risk Aspects"

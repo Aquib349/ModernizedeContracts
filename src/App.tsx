@@ -9,6 +9,7 @@ import Pipeline from "./pages/Pipeline/Pipeline";
 import ContractDetail from "./pages/Contract/contract detail/ContractDetail";
 import Dashboard from "./page/dashboard/Dashboard";
 import { ActiveContextProvider } from "./context/activeContext";
+import BusinessAreaDashboard from "./page/dashboard/my favorite/my contracts/contract summary/business-area-dashboard";
 import ContractSummary from "./page/dashboard/my favorite/my contracts/contract summary/contract-summary";
 import Page from "./page/dashboard/my work/ai response/page";
 import DocumentTable from "./page/dashboard/my favorite/my documents/Document-table";
@@ -60,10 +61,15 @@ const Router = createBrowserRouter([
             path: "contractSummary",
             element: <ContractSummary />,
           },
+          {
+            path: "businessAreaDashboard",
+            element: <BusinessAreaDashboard />,  // The new component
+          },
         ],
       },
     ],
   },
+
 ]);
 
 export default Router;

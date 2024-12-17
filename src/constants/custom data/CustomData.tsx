@@ -23,6 +23,7 @@ export const sideItem = [
     id: 2,
     name: "Business Area Dashboard",
     icon: <FaRegHandPointer />,
+    links: "/businessAreaDashboard"
   },
   { id: 3, name: "Pipeline", icon: <TbBrandDatabricks /> },
   {
