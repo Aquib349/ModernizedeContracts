@@ -32,7 +32,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import StatusColor from "@/constants/StatusColor";
 import { documentData, DocumentRecords } from "@/constants/CustomData";
 import { Link } from "react-router-dom";
 import IconSelector from "@/constants/file-icon-selector";
@@ -92,9 +91,7 @@ export const columns: ColumnDef<DocumentRecords>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className="capitalize">
-        {<StatusColor status={row.getValue("status")} />}
-      </div>
+      <div className="capitalize">{row.getValue("status")}</div>
     ),
   },
   {

@@ -6,20 +6,25 @@ import {
   Folder,
   Minus,
 } from "lucide-react";
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 function GenerativeSidebar() {
   const { active, setActive } = useActiveContext();
   const [favoriteOpen, setFavoriteOpen] = useState(false);
   const [recentlyOpen, setRecentlyOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <>
       <div className="generative-sidebar p-2 fixed">
         <div className="main">
           <div className="text-sm">
-            <nav className="space-y-3 ">
+            <div
+              className={`space-y-3 ${
+                location.pathname.includes("/ba-dashboard") ? "hidden" : "block"
+              }`}
+            >
               {/* My Work */}
               <div className="font-medium">
                 <Link
@@ -34,6 +39,7 @@ function GenerativeSidebar() {
                 </Link>
               </div>
 
+              {/* My Calendar */}
               <div className="font-medium">
                 <Link
                   to="/calendar"
@@ -146,7 +152,14 @@ function GenerativeSidebar() {
                   </div>
                 </div>
               </div>
-            </nav>
+            </div>
+            <div
+              className={`space-y-3 ${
+                location.pathname.includes("/ba-dashboard") ? "" : "hidden"
+              }`}
+            >
+              <span>BA Dashboard</span>
+            </div>
           </div>
         </div>
       </div>

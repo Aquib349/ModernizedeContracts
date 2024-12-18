@@ -11,15 +11,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  ChevronDown,
-  DatabaseZap,
-  MoreHorizontal,
-  NotepadTextDashed,
-  PersonStanding,
-} from "lucide-react";
-
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -39,7 +31,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import StatusColor from "@/constants/StatusColor";
 import { contractData, ContractRecords } from "@/constants/CustomData";
 import { Link } from "react-router-dom";
 
@@ -94,9 +85,7 @@ export const columns: ColumnDef<ContractRecords>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className="capitalize">
-        {<StatusColor status={row.getValue("status")} />}
-      </div>
+      <div className="capitalize">{row.getValue("status")}</div>
     ),
   },
   {

@@ -14,14 +14,17 @@ export const formattedTime = (time: string) => {
   });
 };
 
-// heplper function to convert to minutes
-export function timeToMinute(time: string): number {
-  const [hour, minutes] = time.split(":").map(Number);
-  return hour * 60 + minutes;
-}
+// Function to extract 'Month Day' (e.g., "Dec 15")
+export function extractDatePart(inputString: string) {
+  // For the first case
+  if (inputString.includes("GMT+")) {
+    const match = inputString.match(/([A-Z][a-z]{2} \d{1,2})/);
+    return match ? match[1] : null;
+  }
 
-// helper function to convert time to fractional hour
-export function timeToFraction(time: string): number {
-  const [hour, minutes] = time.split(":").map(Number);
-  return hour + minutes / 60;
+  // For the second case
+  if (inputString.includes(",")) {
+    const match = inputString.match(/, ([A-Z][a-z]{2} \d{1,2})/);
+    return match ? match[1] : null;
+  }
 }

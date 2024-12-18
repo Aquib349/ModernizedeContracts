@@ -13,6 +13,7 @@ import Calendar from "./page/dashboard/my calendar/calendar";
 import CalendarList from "./page/dashboard/my calendar/list view/my-calendar-list";
 import CalendarView from "./page/dashboard/my calendar/calendar view/my-calendar-calendar";
 import DocumentUpload from "./page/dashboard/my favorite/my documents/document-upload";
+import Settings from "./page/settings/indes";
 
 function App() {
   return (
@@ -76,6 +77,10 @@ const Router = createBrowserRouter([
           {
             path: "contractSummary",
             element: <ContractSummary />,
+          },
+          {
+            path: "ba-dashboard",
+            element: <Settings />,
           },
         ],
       },
