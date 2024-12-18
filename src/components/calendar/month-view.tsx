@@ -50,6 +50,8 @@ const MonthView: React.FC<CalendarProps> = ({
       {/* Render Month Days */}
       <div className="grid grid-cols-7 gap-2">
         {monthDays.map((date) => {
+          const isToday =
+            new Date().toDateString() === date.toDate().toDateString();
           // Filter events that match the current date
           const dayEvents = events?.filter(
             (event) =>
@@ -60,9 +62,13 @@ const MonthView: React.FC<CalendarProps> = ({
           return (
             <div
               key={date.toString()}
-              className="h-14 rounded cursor-pointer border p-2 relative"
+              className="h-20 rounded cursor-pointer border border-gray-300 p-2 relative"
             >
-              <span>{date.date()}</span>
+              {isToday ? (
+                <span className="text-indigo-500 font-semibold">{date.date()}</span>
+              ) : (
+                <span>{date.date()}</span>
+              )}
 
               {/* Render Events */}
               {dayEvents?.length > 0 && (

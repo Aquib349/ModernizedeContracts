@@ -83,6 +83,7 @@ const Calendar = () => {
             currentDate={currentDate}
             events={events}
             onEventClick={onEventClick}
+            deleteEvents={deleteEvents}
           />
         )}
         {view === "day" && (

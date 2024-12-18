@@ -1,10 +1,13 @@
 import React from "react";
 import AddEvents from "./add-events";
 import dayjs from "dayjs";
+import { Trash2 } from "lucide-react";
+import { formattedTime } from "@/constants/time-formatter";
 
 interface weekProps {
   currentDate: dayjs.Dayjs;
   events: {
+    id: string;
     event_name: string;
     description: string;
     stay_duration: string;
@@ -18,6 +21,7 @@ interface weekProps {
     start_time: string;
     end_time: string;
   }) => void;
+  deleteEvents: (id: string) => void;
 }
 
 const getWeekDays = (currentDate: any) => {
@@ -31,8 +35,49 @@ const getWeekDays = (currentDate: any) => {
   });
 };
 
-const WeekView = ({ currentDate, events, onEventClick }: weekProps) => {
+const WeekView = ({
+  currentDate,
+  events,
+  onEventClick,
+  deleteEvents,
+}: weekProps) => {
   const daysOfWeek = getWeekDays(currentDate);
+
+  // helper function to check if the time falls between the hour range
+  function calculateEventPosition(startTime: string, endTime: string) {
+    const pixelsPerHour = 64; // 1 hour = 64px
+    const parseTimeToMinutes = (timeStr: string) => {
+      const [hours, minutes] = timeStr.split(":").map(Number);
+      return hours * 60 + minutes; // Total minutes from midnight
+    };
+
+    const startMinutes = parseTimeToMinutes(startTime);
+    const endMinutes = parseTimeToMinutes(endTime);
+    const durationMinutes = Math.max(endMinutes - startMinutes, 20);
+
+    return {
+      top: (startMinutes / 60) * pixelsPerHour,
+      height: (durationMinutes / 60) * pixelsPerHour,
+    };
+  }
+
+  // helper function to match the event dates
+  function IsEventDateSame(dateStr1: string, dateStr2: string) {
+    const isSameDate = (date1: Date, date2: Date) => {
+      return (
+        date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()
+      );
+    };
+
+    // Usage
+    if (isSameDate(new Date(dateStr1), new Date(dateStr2))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   return (
     <div className="mt-8">
@@ -63,11 +108,8 @@ const WeekView = ({ currentDate, events, onEventClick }: weekProps) => {
               {hour}:00
             </div>
 
-            {daysOfWeek.map((_, dayIndex) => (
-              <div
-                key={dayIndex}
-                className="border-t h-16 relative group hover:bg-blue-50"
-              >
+            {daysOfWeek.map((day, dayIndex) => (
+              <div key={dayIndex} className="border-t h-16 relative group">
                 <AddEvents
                   triggerButton={
                     <div
@@ -81,6 +123,45 @@ const WeekView = ({ currentDate, events, onEventClick }: weekProps) => {
                   }
                   onEventClick={onEventClick}
                 />
+
+                {events.map((event) => {
+                  const { top, height } = calculateEventPosition(
+                    event.start_time,
+                    event.end_time
+                  );
+
+                  // Compare the current day and formatted start_time
+                  const isSameDate = IsEventDateSame(
+                    String(day),
+                    formattedTime(event.start_time)
+                  );
+                  console.log(isSameDate);
+
+                  return isSameDate ? (
+                    <div
+                      key={event.id}
+                      style={{
+                        position: "absolute",
+                        top: `${top}px`,
+                        height: `${height}px`,
+                      }}
+                      className="left-0 cursor-pointer right-0 bg-red-100 border-l-4 border-red-300 rounded-lg
+                p-2 flex justify-between items-start text-red-500 shadow-md"
+                    >
+                      <div>
+                        <p className="font-semibold">{event.event_name}</p>
+                        <p className="text-xs">{event.description}</p>
+                      </div>
+
+                      <button
+                        onClick={() => deleteEvents(event.id)}
+                        className="absolute top-2 right-2 text-red-600 cursor-pointer"
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  ) : null;
+                })}
               </div>
             ))}
           </React.Fragment>
