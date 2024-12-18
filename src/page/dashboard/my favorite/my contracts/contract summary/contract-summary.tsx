@@ -15,6 +15,7 @@ import ReviewInsightsTabular from "./tabular-view/review-insights";
 
 const ContractSummary: React.FC = () => {
   const { getView } = useContext(ViewContext);
+  
   return (
     <>
       <div className="contract-summary space-y-2">
