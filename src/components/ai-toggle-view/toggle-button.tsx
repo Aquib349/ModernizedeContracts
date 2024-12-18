@@ -9,6 +9,7 @@ interface toggleButtonProps {
 }
 
 function ToggleButton({ title, componentKey, Allviews }: toggleButtonProps) {
+  
   const { setView, getView } = useContext(ViewContext)!;
 
   return (

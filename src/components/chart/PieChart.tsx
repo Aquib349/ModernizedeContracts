@@ -5,9 +5,10 @@ interface piechartProps {
   title: string;
   series: any[];
   labels: any[];
+  colors: string;
 }
 
-function PieChart({ title, series, labels }: piechartProps) {
+function PieChart({ title, series, labels, colors }: piechartProps) {
   const [pieChart, setPieChart] = useState({
     series: [],
     options: {},
@@ -38,7 +39,7 @@ function PieChart({ title, series, labels }: piechartProps) {
         </h1>
         <ReactApexChart
           type="pie"
-          height={200}
+          height={400}
           options={pieChart.options}
           series={pieChart.series}
         />
