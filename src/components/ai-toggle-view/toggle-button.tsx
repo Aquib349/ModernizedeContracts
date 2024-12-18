@@ -1,6 +1,7 @@
 import { ViewContext } from "@/context/viewContext";
 import { AlignJustify, ChartPie, TableCellsMerge } from "lucide-react";
 import { Folder } from 'lucide-react';
+import CommonDropDown from "../select dropdown/CommonDropDown";
 import { useContext } from "react";
 
 interface toggleButtonProps {
@@ -12,6 +13,9 @@ interface toggleButtonProps {
 
 function ToggleButton({ title, componentKey, Allviews, businessArea }: toggleButtonProps) {
   const { setView, getView } = useContext(ViewContext)!;
+  const handleSelectChange = (value: string) => {
+    console.log("Selected Value:", value);
+  };
 
   return (
     <>
@@ -19,6 +23,28 @@ function ToggleButton({ title, componentKey, Allviews, businessArea }: toggleBut
         <div className="flex">
           {businessArea && <div className="mr-2"><Folder className="text-customYellow " /></div>}
           <h2 className="font-semibold text-base text-gray-700">{title}</h2>
+          {businessArea && <CommonDropDown items={[
+            { value: "apple", label: "Apple" },
+            { value: "banana", label: "Banana" },
+            { value: "blueberry", label: "Blueberry" },
+            { value: "grapes", label: "Grapes" },
+            { value: "pineapple", label: "Pineapple" },
+          ]}
+            placeholder="View"
+            onChange={handleSelectChange}
+            className="w-40"
+            triggerClassName="text-gray-700" />}
+          {businessArea && <CommonDropDown items={[
+            { value: "apple", label: "Apple" },
+            { value: "banana", label: "Banana" },
+            { value: "blueberry", label: "Blueberry" },
+            { value: "grapes", label: "Grapes" },
+            { value: "pineapple", label: "Pineapple" },
+          ]}
+            placeholder="Filter"
+            onChange={handleSelectChange}
+            className="w-40"
+            triggerClassName="text-gray-700" />}
         </div>
         <div className="flex items-center gap-2">
           {/* List View */}

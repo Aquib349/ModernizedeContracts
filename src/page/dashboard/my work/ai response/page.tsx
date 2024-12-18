@@ -10,7 +10,7 @@ function Page() {
       <div className="ai-response-compoent">
         <div className="main text-sm">
           {/* heading */}
-          <ToggleView heading="My Dashboard"/>
+          <ToggleView heading="My Dashboard" />
 
           {/* response contents */}
           <div className="space-y-4">

@@ -1,6 +1,6 @@
 import BarChart from "@/components/chart/bar-chart";
 
-function ContractLifeCycleGraph() {
+function ContractRenewalPipeline() {
   return (
     <>
       <div className="space-y-14">
@@ -29,4 +29,4 @@ function ContractLifeCycleGraph() {
   );
 }
 
-export default ContractLifeCycleGraph;
+export default ContractRenewalPipeline;
