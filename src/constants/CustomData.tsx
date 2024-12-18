@@ -3,12 +3,184 @@ import { SlBell } from "react-icons/sl";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { FaRegCircleQuestion } from "react-icons/fa6";
 import { FaRegUserCircle } from "react-icons/fa";
+import { IoSettingsOutline } from "react-icons/io5";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaRegHandPointer } from "react-icons/fa";
 import { TbBrandDatabricks } from "react-icons/tb";
 import { LiaFileContractSolid } from "react-icons/lia";
 import { BsCalendar2Month, BsUiChecks } from "react-icons/bs";
 import { CalendarDays, CalendarRange } from "lucide-react";
+
+// Define table columns
+export const columns = [
+  { header: "Contract Type", key: "ContractType" },
+  { header: "Count", key: "value" },
+  { header: "% of Total Contracts", key: "Percentage" },
+  { header: "Status Breakdown", key: "Status" }
+];
+
+// Define table data
+export const dataItem = [
+  {
+    ContractType: "Master Service Agreements",
+    value: "120",
+    Percentage: "27",
+    Status: "80 Active, 40 Expired"
+  },
+  {
+    ContractType: "Dealer Contracts",
+    value: "100",
+    Percentage: "22",
+    Status: "70 Active, 10 Terminating"
+  },
+  {
+    ContractType: "Software Licensing",
+    value: "80",
+    Percentage: "18",
+    Status: "60 Active, 20 Expired"
+  },
+  {
+    ContractType: "Service Agreements",
+    value: "150",
+    Percentage: "33",
+    Status: "120 Active, 30 Expired"
+  },
+];
+
+// Define table columns
+export const columns1 = [
+  { header: "Metric", key: "Metric" },
+  { header: "Value", key: "value" },
+  { header: "Key Insights", key: "KeyInsights" },
+];
+
+// Define table data
+export const data1 = [
+  {
+    Metric: "Total Contracts",
+    value: "$450",
+    KeyInsights: "5% increase QoQ",
+  },
+  {
+    Metric: "Total Contract Value (TCV)",
+    value: "$200M",
+    KeyInsights: "7% growth driven by renewals",
+  },
+  {
+    Metric: "Average Contract Value (ACV)",
+    value: "$500K",
+    KeyInsights: "10% increase in Large Hospital deals",
+  },
+  {
+    Metric: "Revenue Impact from Issues",
+    value: "-$5M",
+    KeyInsights: "Concentrated in SLA disputes",
+  },
+];
+
+
+// Define table columns
+export const columns2 = [
+  { header: "Renewal Activity", key: "RenewalActivity" },
+  { header: "Count", key: "Count" },
+  { header: "Potential Revenue", key: "PotentialRevenue" },
+  { header: "Renewal Probability", key: "RenewalProbability" },
+];
+
+// Define table data
+export const data2 = [
+  {
+    RenewalActivity: "Initial Renewal Review",
+    Count: "20",
+    PotentialRevenue: "$5M",
+    RenewalProbability: "70%"
+  },
+  {
+    RenewalActivity: "In Negotiation",
+    Count: "15",
+    PotentialRevenue: "$4M",
+    RenewalProbability: "78%"
+  },
+  {
+    RenewalActivity: "Final Approval",
+    Count: "10",
+    PotentialRevenue: "$2.2M",
+    RenewalProbability: "90%"
+  },
+  {
+    RenewalActivity: "Renewal Completed",
+    Count: "12",
+    PotentialRevenue: "$3.3M",
+    RenewalProbability: "100%"
+  },
+];
+
+// Define table columns
+export const columns3 = [
+  { header: "Metric", key: "Metric" },
+  { header: "Value", key: "Value" },
+  { header: "Key Insights", key: "KeyInsights" },
+];
+
+// Define table data
+export const data3 = [
+  {
+    Metric: "New Contract Signed",
+    Value: "50",
+    KeyInsights: "$15M Added Revenue",
+  },
+  {
+    Metric: "Average Intake Time",
+    Value: "15 minutes",
+    KeyInsights: "Reduced by 2 min QoQ",
+  },
+  {
+    Metric: "Intake Completion Rate",
+    Value: "95%",
+    KeyInsights: "Remaining 5% pending information",
+  },
+  {
+    Metric: "Contract Updates (in Progress)",
+    Value: "18",
+    KeyInsights: "New Contracts Updates",
+  },
+];
+
+// Define table columns
+export const columns4 = [
+  { header: "Renewal Activity", key: "RenewalActivity" },
+  { header: "Count", key: "Count" },
+  { header: "Revenue Impact", key: "RevenueImpact" },
+  { header: "Resolution Status", key: "ResolutionStatus" },
+];
+
+// Define table data
+export const data4 = [
+  {
+    RenewalActivity: "SLA Disputes",
+    Count: "20",
+    RevenueImpact: "-$2M",
+    ResolutionStatus: "60% Resolved"
+  },
+  {
+    RenewalActivity: "Payment Delays",
+    Count: "15",
+    RevenueImpact: "-$1M",
+    ResolutionStatus: "Pending Resolution"
+  },
+  {
+    RenewalActivity: "Compliance Violations",
+    Count: "10",
+    RevenueImpact: "-$1.2M",
+    ResolutionStatus: "Escalated to Legal"
+  },
+  {
+    RenewalActivity: "Others",
+    Count: "12",
+    RevenueImpact: "-$100M",
+    ResolutionStatus: "60% Resolved"
+  },
+];
 
 export const NavItems = [
   // { id: 1, name: "Tasks", icon: <AiOutlineBars /> },
@@ -24,7 +196,13 @@ export const sideItem = [
     id: 2,
     name: "Business Area Dashboard",
     icon: <FaRegHandPointer />,
-    link: "/business-area",
+    links: "/business-area",
+  },
+  {
+    id: 3,
+    name: "Setting",
+    icon: <IoSettingsOutline />,
+    links: "/business-setting",
   },
 ];
 

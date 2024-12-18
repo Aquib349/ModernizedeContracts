@@ -13,6 +13,8 @@ import Calendar from "./page/dashboard/my calendar/calendar";
 import CalendarList from "./page/dashboard/my calendar/list view/my-calendar-list";
 import CalendarView from "./page/dashboard/my calendar/calendar view/my-calendar-calendar";
 import DocumentUpload from "./page/dashboard/my favorite/my documents/document-upload";
+import BusinessAreaDashboard from "./page/dashboard/my favorite/my contracts/contract summary/business-area-dashboard";
+import Setting from "./page/setting/Setting";
 
 function App() {
   return (
@@ -77,11 +79,15 @@ const Router = createBrowserRouter([
             path: "contractSummary",
             element: <ContractSummary />,
           },
+          {
+            path: "/business-area",
+            element: <BusinessAreaDashboard />,  // The new component
+          },
+          {
+            path: "/business-setting",
+            element: <Setting />,  // The new component
+          },
         ],
-      },
-      {
-        path: "/business-area",
-        // import the element => created compnent ex: Business Area Components
       },
     ],
   },
