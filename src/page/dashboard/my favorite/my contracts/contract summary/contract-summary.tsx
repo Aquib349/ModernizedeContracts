@@ -12,10 +12,12 @@ import ContractLifeCycleGraph from "./graphical-view/contract-life-cycle-chart";
 import ActivityPlanGraph from "./graphical-view/activity-plan";
 import ReviewInsightsGraph from "./graphical-view/review-insights";
 import ReviewInsightsTabular from "./tabular-view/review-insights";
+import { contractSummerycolumns, contractSummerydata } from "@/constants/CustomData";
 
 const ContractSummary: React.FC = () => {
+
   const { getView } = useContext(ViewContext);
-  
+
   return (
     <>
       <div className="contract-summary space-y-2">
@@ -86,7 +88,7 @@ const ContractSummary: React.FC = () => {
           ) : getView("reviewInsights") === "graph" ? (
             <ReviewInsightsGraph />
           ) : (
-            <ReviewInsightsTabular />
+            <ReviewInsightsTabular columns={contractSummerycolumns} data={contractSummerydata} />
           )}
         </div>
 
