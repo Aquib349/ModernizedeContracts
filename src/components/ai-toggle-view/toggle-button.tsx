@@ -9,7 +9,7 @@ interface toggleButtonProps {
 }
 
 function ToggleButton({ title, componentKey, Allviews }: toggleButtonProps) {
-  const { setView, getView } = useContext(ViewContext)!;
+  const { setView, getView } = useContext(ViewContext);
 
   const titleIcons: { [key: string]: JSX.Element } = {
     "Contract Repository Overview": <FolderKanban size={18} />,
@@ -38,6 +38,8 @@ function ToggleButton({ title, componentKey, Allviews }: toggleButtonProps) {
         </div>
         <div className="flex items-center gap-2">
           {Allviews?.map((view) => {
+            { console.log("view:-", view) }
+            { console.log("getView(componentKey):-", getView(componentKey)) }
             return (
               <div
                 key={view}
@@ -48,7 +50,7 @@ function ToggleButton({ title, componentKey, Allviews }: toggleButtonProps) {
                   <div
                     className={`p-1 rounded-md ${getView(componentKey) === view ? "text-black" : "bg-white"}`}
                   >
-                    {viewIcons[view] || <span>{view}</span>} {/* Fallback for unknown view */}
+                    {viewIcons[view]}
                   </div>
                 </span>
               </div>
