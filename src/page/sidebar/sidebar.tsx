@@ -49,7 +49,7 @@ function GenerativeSidebar() {
                 <div
                   className={`w-[1.5px] bg-slate-100 absolute left-[0.4rem] transition-all duration-300`}
                   style={{
-                    height: (favoriteOpen ? 100 : 0) + "px",
+                    height: (favoriteOpen ? 65 : 0) + "px",
                   }}
                 ></div>
                 <div
@@ -100,18 +100,16 @@ function GenerativeSidebar() {
               : location.pathname === "/business-area" ? (
                 <div>
                   {/* BA Dashboard */}
-                  <div className="font-medium flex items-center gap-2">
+                  <div className="font-medium flex items-center gap-2 cursor-pointer">
 
                     <LayoutDashboard className="w-4 h-4" />
                     BA Dashboard
 
                   </div>
                   {/* pipeline */}
-                  <div className="relative w-full mt-4">
+                  <div className="relative w-full mt-2">
                     <div
-                      className={`flex items-center justify-between font-medium cursor-pointer w-full ${active === "/favorite" ||
-                        active === "/favorite/contracts" ||
-                        active === "/favorite/documents" ||
+                      className={`flex items-center justify-between font-medium cursor-pointer w-full ${active === "/favorite/documents" ||
                         active === "/favorite/recently-accessed"
                         ? "text-black"
                         : "text-gray-500"
@@ -134,7 +132,7 @@ function GenerativeSidebar() {
                     <div
                       className={`w-[1.5px] bg-slate-100 absolute left-[0.4rem] transition-all duration-300`}
                       style={{
-                        height: (favoriteOpen ? 100 : 0) + "px",
+                        height: (favoriteOpen ? 65 : 0) + "px",
                       }}
                     ></div>
                     <div

@@ -1,3 +1,4 @@
+
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import { ToggleMenuContextProvider } from "./context/SideMenuContext";
 import Navigation from "./shared/Navigation/Navigation";
@@ -13,7 +14,10 @@ import Calendar from "./page/dashboard/my calendar/calendar";
 import CalendarList from "./page/dashboard/my calendar/list view/my-calendar-list";
 import CalendarView from "./page/dashboard/my calendar/calendar view/my-calendar-calendar";
 import DocumentUpload from "./page/dashboard/my favorite/my documents/document-upload";
-import BusinessAreaDashboard from "./page/dashboard/my favorite/my contracts/contract summary/business-area-dashboard";
+import BusinessAreaDashboard from "./page/business area/ba dashboard/ba-dashboard";
+import SettingDashboard from "./page/business area/Dashboard";
+import BADashboard from "./page/business area/Dashboard";
+
 import Setting from "./page/setting/Setting";
 
 function App() {
@@ -79,17 +83,38 @@ const Router = createBrowserRouter([
             path: "contractSummary",
             element: <ContractSummary />,
           },
-          {
-            path: "/business-area",
-            element: <BusinessAreaDashboard />,  // The new component
-          },
-          {
-            path: "/business-setting",
-            element: <Setting />,  // The new component
-          },
         ],
       },
+      {
+        path: "business-area",
+        element: (
+          <ViewContextProvider>
+            <BADashboard />,
+          </ViewContextProvider>
+        ),
+        children: [
+          {
+            path: "/business-area",
+            element: <BusinessAreaDashboard />,
+          },
+        ]
+      },
+      {
+        path: "business-setting",
+        element: (
+          <ViewContextProvider>
+            <SettingDashboard />,
+          </ViewContextProvider>
+        ),
+        children: [
+          {
+            path: "/business-setting",
+            element: <Setting />,
+          }
+        ]
+      },
     ],
+
   },
 ]);
 

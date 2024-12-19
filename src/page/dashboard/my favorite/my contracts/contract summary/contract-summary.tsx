@@ -53,7 +53,7 @@ const ContractSummary: React.FC = () => {
           <ToggleButton
             title="Lifecycle Progress Bar"
             componentKey="contractLifeCycle"
-            Allviews={false}
+            Allviews={["list", "graph"]}
           />
           {getView("contractLifeCycle") === "list" ? (
             <ContractLifeCycle />
@@ -67,7 +67,7 @@ const ContractSummary: React.FC = () => {
           <ToggleButton
             title="Activity Plan"
             componentKey="activityPlan"
-            Allviews={false}
+            Allviews={["list", "graph"]}
           />
           {getView("activityPlan") === "list" ? (
             <AcitivityPlan />
@@ -81,7 +81,7 @@ const ContractSummary: React.FC = () => {
           <ToggleButton
             title="Review Insights"
             componentKey="reviewInsights"
-            Allviews={true}
+            Allviews={["list", "graph", "tabular"]}
           />
           {getView("reviewInsights") === "list" ? (
             <ReviewInsights />
@@ -97,7 +97,7 @@ const ContractSummary: React.FC = () => {
           <ToggleButton
             title="Contract Highlights"
             componentKey="contractHighlights"
-            Allviews={false}
+            Allviews={["list"]}
           />
           <ContractHighLights />
         </div>
@@ -107,7 +107,7 @@ const ContractSummary: React.FC = () => {
           <ToggleButton
             title="Activity Timeline"
             componentKey="activityTimeline"
-            Allviews={false}
+            Allviews={["list"]}
           />
           <ActivityTimeline />
         </div>

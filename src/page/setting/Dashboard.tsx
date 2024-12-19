@@ -6,7 +6,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { useActiveContext } from "@/context/activeContext";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 
-function SettingDashboard() {
+function BADashboard() {
     const { isOpen } = useContext(ToggleMenuContext);
     const { sideNav, setSideNav } = useActiveContext();
     const location = useLocation();
@@ -52,4 +52,4 @@ function SettingDashboard() {
     );
 }
 
-export default SettingDashboard;
+export default BADashboard;
