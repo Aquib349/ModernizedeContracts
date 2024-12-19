@@ -224,7 +224,7 @@ export const sideItem = [
     id: 3,
     name: "Setting",
     icon: <IoSettingsOutline />,
-    links: "/setting",
+    links: "business-setting",
   },
 ];
 

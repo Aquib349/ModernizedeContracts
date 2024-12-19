@@ -90,15 +90,6 @@ const Router = createBrowserRouter([
         path: "business-area",
         element: (
           <ViewContextProvider>
-<<<<<<< HEAD
-            <BusinessAreaDashboard />,
-          </ViewContextProvider>
-        ),
-      },
-      {
-        path: "setting",
-        element: <Setting />,
-=======
             <BADashboard />,
           </ViewContextProvider>
         ),
@@ -122,7 +113,6 @@ const Router = createBrowserRouter([
             element: <Setting />,
           }
         ]
->>>>>>> c630cd90d8c8991d6f3c5a7f10430d31ee9b55b5
       },
     ],
 
