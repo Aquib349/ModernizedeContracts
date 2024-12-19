@@ -13,6 +13,7 @@ interface contextProps {
   view: string;
   events: {
     id: string;
+    color: string;
     event_name: string;
     description: string;
     stay_duration: string;
@@ -38,7 +39,7 @@ export const CalendarContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [view, setView] = useState<"day" | "week" | "month">("week");
+  const [view, setView] = useState<"day" | "week" | "month">("month");
   const [events, setEvents] = useState([]);
 
   const onEventClick = async (event: any) => {

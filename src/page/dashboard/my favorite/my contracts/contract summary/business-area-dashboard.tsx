@@ -30,12 +30,12 @@ interface ToggleButtonProps {
   businessArea: boolean;
 }
 
-function BusinessAreaDashboard({
+const BusinessAreaDashboard = ({
   title,
   componentKey,
   Allviews,
   businessArea,
-}: ToggleButtonProps) {
+}: ToggleButtonProps) => {
   const { getView } = useContext(ViewContext);
 
   return (
@@ -249,6 +249,6 @@ function BusinessAreaDashboard({
       </div>
     </>
   );
-}
+};
 
 export default BusinessAreaDashboard;

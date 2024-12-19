@@ -47,6 +47,8 @@ const MonthView: React.FC<CalendarProps> = ({
   deleteEvents,
 }) => {
   const monthDays = getMonthDays(currentDate);
+  const firstDayOfMonth = currentDate.startOf("month");
+  const startDayIndex = firstDayOfMonth.day();
 
   return (
     <div className="mt-4">
@@ -61,6 +63,16 @@ const MonthView: React.FC<CalendarProps> = ({
 
       {/* Render Month Days */}
       <div className="grid grid-cols-7 gap-2">
+        
+        {/* add empty cells for the before days of month */}
+        {Array.from({ length: startDayIndex }).map((_, i) => (
+          <div
+            key={`empty-${i} h-20 border border-transparent`}
+            className=""
+          ></div>
+        ))}
+
+        {/* render month date */}
         {monthDays.map((date) => {
           const isToday =
             new Date().toDateString() === date.toDate().toDateString();

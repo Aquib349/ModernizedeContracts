@@ -16,7 +16,7 @@ export const columns = [
   { header: "Contract Type", key: "ContractType" },
   { header: "Count", key: "value" },
   { header: "% of Total Contracts", key: "Percentage" },
-  { header: "Status Breakdown", key: "Status" }
+  { header: "Status Breakdown", key: "Status" },
 ];
 
 // Define table data
@@ -25,25 +25,25 @@ export const dataItem = [
     ContractType: "Master Service Agreements",
     value: "120",
     Percentage: "27",
-    Status: "80 Active, 40 Expired"
+    Status: "80 Active, 40 Expired",
   },
   {
     ContractType: "Dealer Contracts",
     value: "100",
     Percentage: "22",
-    Status: "70 Active, 10 Terminating"
+    Status: "70 Active, 10 Terminating",
   },
   {
     ContractType: "Software Licensing",
     value: "80",
     Percentage: "18",
-    Status: "60 Active, 20 Expired"
+    Status: "60 Active, 20 Expired",
   },
   {
     ContractType: "Service Agreements",
     value: "150",
     Percentage: "33",
-    Status: "120 Active, 30 Expired"
+    Status: "120 Active, 30 Expired",
   },
 ];
 
@@ -78,7 +78,6 @@ export const data1 = [
   },
 ];
 
-
 // Define table columns
 export const columns2 = [
   { header: "Renewal Activity", key: "RenewalActivity" },
@@ -93,25 +92,25 @@ export const data2 = [
     RenewalActivity: "Initial Renewal Review",
     Count: "20",
     PotentialRevenue: "$5M",
-    RenewalProbability: "70%"
+    RenewalProbability: "70%",
   },
   {
     RenewalActivity: "In Negotiation",
     Count: "15",
     PotentialRevenue: "$4M",
-    RenewalProbability: "78%"
+    RenewalProbability: "78%",
   },
   {
     RenewalActivity: "Final Approval",
     Count: "10",
     PotentialRevenue: "$2.2M",
-    RenewalProbability: "90%"
+    RenewalProbability: "90%",
   },
   {
     RenewalActivity: "Renewal Completed",
     Count: "12",
     PotentialRevenue: "$3.3M",
-    RenewalProbability: "100%"
+    RenewalProbability: "100%",
   },
 ];
 
@@ -160,25 +159,25 @@ export const data4 = [
     RenewalActivity: "SLA Disputes",
     Count: "20",
     RevenueImpact: "-$2M",
-    ResolutionStatus: "60% Resolved"
+    ResolutionStatus: "60% Resolved",
   },
   {
     RenewalActivity: "Payment Delays",
     Count: "15",
     RevenueImpact: "-$1M",
-    ResolutionStatus: "Pending Resolution"
+    ResolutionStatus: "Pending Resolution",
   },
   {
     RenewalActivity: "Compliance Violations",
     Count: "10",
     RevenueImpact: "-$1.2M",
-    ResolutionStatus: "Escalated to Legal"
+    ResolutionStatus: "Escalated to Legal",
   },
   {
     RenewalActivity: "Others",
     Count: "12",
     RevenueImpact: "-$100M",
-    ResolutionStatus: "60% Resolved"
+    ResolutionStatus: "60% Resolved",
   },
 ];
 
@@ -202,7 +201,7 @@ export const sideItem = [
     id: 3,
     name: "Setting",
     icon: <IoSettingsOutline />,
-    links: "/business-setting",
+    links: "/setting",
   },
 ];
 

@@ -5,9 +5,10 @@ import { ViewContext } from "@/context/viewContext";
 
 interface ToggleViewProps {
   heading: string;
+  businessArea: boolean;
 }
 
-const ToggleView: React.FC<ToggleViewProps> = ({ heading }) => {
+const ToggleView: React.FC<ToggleViewProps> = ({ heading, businessArea }) => {
   // const { view, setView } = useContext(ViewContext);
   return (
     <>

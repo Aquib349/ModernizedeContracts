@@ -17,7 +17,7 @@ const CalendarHeader: React.FC<CdHeaderProps> = ({ views, setView }) => {
             <img src={stars} alt="loading.." className="w-3" />
             <Input
               type="text"
-              placeholder="Search Anything..."
+              placeholder="Search Events..."
               className="text-xs border-0 bg-transparent"
             />
           </div>

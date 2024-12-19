@@ -15,7 +15,6 @@ function Dashboard() {
     location.pathname === "/contracts" ||
     location.pathname === "/documents" ||
     location.pathname === "/document-upload";
-
   return (
     <div
       className={`transition-all duration-500 ease-in-out ${
@@ -25,7 +24,7 @@ function Dashboard() {
       <div
         className={`main grid ${
           isHidden ? "grid-cols-6 gap-2" : "grid-cols-5"
-        } bg-gradient-to-r from-indigo-50 via-purple-100 to-pink-100`}
+        } body-gradient`}
       >
         {/* Sidebar */}
 

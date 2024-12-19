@@ -79,15 +79,19 @@ const Router = createBrowserRouter([
             path: "contractSummary",
             element: <ContractSummary />,
           },
-          {
-            path: "/business-area",
-            element: <BusinessAreaDashboard />, 
-          },
-          {
-            path: "/business-setting",
-            element: <Setting />,  // The new component
-          },
         ],
+      },
+      {
+        path: "business-area",
+        element: (
+          <ViewContextProvider>
+            <BusinessAreaDashboard />,
+          </ViewContextProvider>
+        ),
+      },
+      {
+        path: "setting",
+        element: <Setting />,
       },
     ],
   },
