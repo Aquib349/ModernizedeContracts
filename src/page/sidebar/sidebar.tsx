@@ -5,13 +5,15 @@ import {
   FileText,
   Folder,
   Minus,
-  LayoutDashboard
+  LayoutDashboard,
+  ListEnd
 } from "lucide-react";
 import { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function GenerativeSidebar() {
   const { active, setActive } = useActiveContext();
+  
   const [favoriteOpen, setFavoriteOpen] = useState(false);
   const [recentlyOpen, setRecentlyOpen] = useState(false);
   const location = useLocation();
@@ -38,7 +40,7 @@ function GenerativeSidebar() {
                   }}
                 >
                   <div className={`flex items-center gap-2`}>
-                    <Folder className="w-4 h-4" />
+                    <ListEnd className="w-4 h-4" />
                     Pipeline
                   </div>
                   <ChevronRight
@@ -109,8 +111,8 @@ function GenerativeSidebar() {
                   {/* pipeline */}
                   <div className="relative w-full mt-2">
                     <div
-                      className={`flex items-center justify-between font-medium cursor-pointer w-full ${active === "/favorite/documents" ||
-                        active === "/favorite/recently-accessed"
+                      className={`flex items-center justify-between font-medium cursor-pointer w-full ${active === "/pipeline/documents" ||
+                        active === "/pipeline/recently-accessed"
                         ? "text-black"
                         : "text-gray-500"
                         }`}
@@ -121,7 +123,7 @@ function GenerativeSidebar() {
                       }}
                     >
                       <div className={`flex items-center gap-2`}>
-                        <Folder className="w-4 h-4" />
+                        <ListEnd className="w-4 h-4" />
                         Pipeline
                       </div>
                       <ChevronRight
@@ -310,3 +312,6 @@ function GenerativeSidebar() {
 }
 
 export default GenerativeSidebar;
+
+
+
