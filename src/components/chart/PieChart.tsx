@@ -5,7 +5,7 @@ interface piechartProps {
   title: string;
   series: any[];
   labels: any[];
-  colors: string;
+  colors?: any[];
 }
 
 function PieChart({ title, series, labels, colors }: piechartProps) {

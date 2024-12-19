@@ -11,6 +11,29 @@ import { LiaFileContractSolid } from "react-icons/lia";
 import { BsCalendar2Month, BsUiChecks } from "react-icons/bs";
 import { CalendarDays, CalendarRange } from "lucide-react";
 
+
+export const contractSummerycolumns = [
+  { header: "Category", key: "category" },
+  { header: "Details", key: "details", render: (details) => <div>{details}</div> },
+];
+
+// Define table data
+export const contractSummerydata = [
+  {
+    category: "Primary Reviewers",
+    details: "Rick, Lisa, Mike (Counterparty)",
+  },
+  {
+    category: "Documents Being Reviewed",
+    details: (
+      <>
+        <p>Draft Contract Agreement v2.3 (Updated February 10, 2024)</p>
+        <p>Scope of Work v3.0 (Last Updated March 1, 2024)</p>
+      </>
+    ),
+  },
+];
+
 // Define table columns
 export const columns = [
   { header: "Contract Type", key: "ContractType" },

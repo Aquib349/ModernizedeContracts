@@ -6,12 +6,17 @@ import {
   Folder,
   Minus,
   LayoutDashboard,
+<<<<<<< HEAD
+=======
+  ListEnd
+>>>>>>> c630cd90d8c8991d6f3c5a7f10430d31ee9b55b5
 } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function GenerativeSidebar() {
   const { active, setActive } = useActiveContext();
+  
   const [favoriteOpen, setFavoriteOpen] = useState(false);
   const [recentlyOpen, setRecentlyOpen] = useState(false);
   const location = useLocation();
@@ -39,7 +44,7 @@ function GenerativeSidebar() {
                   }}
                 >
                   <div className={`flex items-center gap-2`}>
-                    <Folder className="w-4 h-4" />
+                    <ListEnd className="w-4 h-4" />
                     Pipeline
                   </div>
                   <ChevronRight
@@ -51,7 +56,7 @@ function GenerativeSidebar() {
                 <div
                   className={`w-[1.5px] bg-slate-100 absolute left-[0.4rem] transition-all duration-300`}
                   style={{
-                    height: (favoriteOpen ? 100 : 0) + "px",
+                    height: (favoriteOpen ? 65 : 0) + "px",
                   }}
                 ></div>
                 <div
@@ -96,6 +101,7 @@ function GenerativeSidebar() {
                   </div>
                 </div>
               </div>
+<<<<<<< HEAD
             ) : location.pathname === "/business-area" ? (
               <div>
                 {/* BA Dashboard */}
@@ -145,6 +151,54 @@ function GenerativeSidebar() {
                       {/* My Contracts */}
                       <div className="relative w-full">
                         <div className="flex items-center justify-between cursor-pointer w-full">
+=======
+
+              : location.pathname === "/business-area" ? (
+                <div>
+                  {/* BA Dashboard */}
+                  <div className="font-medium flex items-center gap-2 cursor-pointer">
+
+                    <LayoutDashboard className="w-4 h-4" />
+                    BA Dashboard
+
+                  </div>
+                  {/* pipeline */}
+                  <div className="relative w-full mt-2">
+                    <div
+                      className={`flex items-center justify-between font-medium cursor-pointer w-full ${active === "/pipeline/documents" ||
+                        active === "/pipeline/recently-accessed"
+                        ? "text-black"
+                        : "text-gray-500"
+                        }`}
+                      onClick={() => {
+                        setFavoriteOpen(!favoriteOpen);
+                        setRecentlyOpen(false);
+                        setActive("/favorite");
+                      }}
+                    >
+                      <div className={`flex items-center gap-2`}>
+                        <ListEnd className="w-4 h-4" />
+                        Pipeline
+                      </div>
+                      <ChevronRight
+                        className={`w-4 h-4 transform transition-transform duration-300  ${favoriteOpen ? "rotate-90" : ""
+                          }`}
+                      />
+                    </div>
+                    <div
+                      className={`w-[1.5px] bg-slate-100 absolute left-[0.4rem] transition-all duration-300`}
+                      style={{
+                        height: (favoriteOpen ? 65 : 0) + "px",
+                      }}
+                    ></div>
+                    <div
+                      className={`transition-all duration-300 overflow-hidden text-slate-500 ${favoriteOpen ? "max-h-screen" : "max-h-0"
+                        }`}
+                    >
+                      <div className="pl-1 mt-4 space-y-3">
+                        {/* My Contracts */}
+                        <div className="relative w-full">
+>>>>>>> c630cd90d8c8991d6f3c5a7f10430d31ee9b55b5
                           <div
                             className={`flex items-center gap-1 font-medium ${
                               active === "/favorite/contracts"
@@ -332,3 +386,6 @@ function GenerativeSidebar() {
 }
 
 export default GenerativeSidebar;
+
+
+

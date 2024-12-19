@@ -15,7 +15,7 @@ function ContractRepositoryOverview() {
                 title="Contract Distribution by Type"
                 series={[3, 4, 2, 1]}
                 labels={["Service Agreement", "Master Service Agreement", "Software Licensing", "Dealer Contract"]}
-                colors={["#F857C1", "#F53255", "#F46920", "#FFAF00"]} 
+                colors={["#F857C1", "#F53255", "#F46920", "#FFAF00"]}
             />
         </div>
     );

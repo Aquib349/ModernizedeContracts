@@ -1,15 +1,12 @@
-import { AlignJustify, ChartPie, CircleArrowRight } from "lucide-react";
+import { CircleArrowRight } from "lucide-react";
 import ai_logo from "../../assets/image.png";
-import { useContext } from "react";
-import { ViewContext } from "@/context/viewContext";
 
 interface ToggleViewProps {
   heading: string;
   businessArea: boolean;
 }
 
-const ToggleView: React.FC<ToggleViewProps> = ({ heading, businessArea }) => {
-  // const { view, setView } = useContext(ViewContext);
+const ToggleView: React.FC<ToggleViewProps> = ({ heading }) => {
   return (
     <>
       <div className="bg-white rounded my-2">
@@ -20,36 +17,6 @@ const ToggleView: React.FC<ToggleViewProps> = ({ heading, businessArea }) => {
               {heading}
             </h1>
           </div>
-          {/* <div className="flex items-center gap-2">
-            <div
-              className="flex items-center py-2 cursor-pointer text-sm"
-              onClick={() => setView("list")}
-            >
-              <span className="p-0.5 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 rounded-md">
-                <div
-                  className={`p-1 rounded-md ${
-                    view === "list" ? "text-white" : "bg-white"
-                  }`}
-                >
-                  <AlignJustify size={18} />
-                </div>
-              </span>
-            </div>
-            <div
-              className="flex items-center py-2 cursor-pointer text-sm"
-              onClick={() => setView("graph")}
-            >
-              <span className="p-0.5 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 rounded-md">
-                <div
-                  className={`p-1 rounded-md ${
-                    view === "graph" ? "text-white" : "bg-white"
-                  }`}
-                >
-                  <ChartPie size={18} />
-                </div>
-              </span>
-            </div>
-          </div> */}
           <div className="flex items-center space-x-2">
             <p className="text-blue-500 text-sm">Switch to classic View</p>
             <CircleArrowRight

@@ -23,7 +23,7 @@ export const ViewContextProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const getView = (key: string) => {
-    return views[key] || "list";
+    return views[key] || "tabular";
   };
 
   return (
