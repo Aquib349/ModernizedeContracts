@@ -1,17 +1,21 @@
+import { ColourSelector } from "@/constants/color-selector";
 import { formattedTime } from "@/constants/time-formatter";
 import { Trash2 } from "lucide-react";
 
 interface EventProps {
   EventData: any[];
+  deleteEvents: (id: string) => void;
 }
 
-const CalendarEvents = ({ EventData }: EventProps) => {
+const CalendarEvents = ({ EventData, deleteEvents }: EventProps) => {
   return (
     <>
       {EventData?.map((event) => (
         <div
           key={event.id}
-          className="mt-2 all-events rounded p-2 bg-red-100 text-xs text-red-500 relative cursor-pointer"
+          className={`mt-2 all-events rounded p-2 text-xs ${ColourSelector(
+            event.color
+          )} relative cursor-pointer`}
         >
           <p className="font-semibold">{event.event_name}</p>
           <p>{event.description}</p>
@@ -32,7 +36,7 @@ const CalendarEvents = ({ EventData }: EventProps) => {
 
           {/* delete events */}
           <div className="absolute top-2 right-2 text-red-600 cursor-pointer">
-            <Trash2 size={13} />
+            <Trash2 size={13} onClick={() => deleteEvents(event.id)} />
           </div>
         </div>
       ))}

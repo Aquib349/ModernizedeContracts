@@ -1,7 +1,7 @@
 import { sideItem } from "@/constants/CustomData";
 import { ToggleMenuContext } from "@/context/SideMenuContext";
 import { useContext, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { isOpen } = useContext(ToggleMenuContext);

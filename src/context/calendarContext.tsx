@@ -38,7 +38,7 @@ export const CalendarContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [view, setView] = useState<"day" | "week" | "month">("day");
+  const [view, setView] = useState<"day" | "week" | "month">("week");
   const [events, setEvents] = useState([]);
 
   const onEventClick = async (event: any) => {

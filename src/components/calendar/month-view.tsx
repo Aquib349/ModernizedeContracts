@@ -2,10 +2,15 @@ import React from "react";
 import dayjs from "dayjs";
 import { dayNames } from "@/constants/CustomData";
 import AddEvents from "./add-events";
+import { Trash2 } from "lucide-react";
+import { formattedTime } from "@/constants/time-formatter";
+import { ColourSelector } from "@/constants/color-selector";
 
 interface CalendarProps {
   currentDate: dayjs.Dayjs;
   events: {
+    id: string;
+    color: string;
     event_name: string;
     description: string;
     stay_duration: string;
@@ -19,6 +24,7 @@ interface CalendarProps {
     start_time: string;
     end_time: string;
   }) => void;
+  deleteEvents: (id: string) => void;
 }
 
 const getMonthDays = (currentDate: dayjs.Dayjs): dayjs.Dayjs[] => {
@@ -29,10 +35,16 @@ const getMonthDays = (currentDate: dayjs.Dayjs): dayjs.Dayjs[] => {
   );
 };
 
+const getDayFromDateString = (dateStr: string) => {
+  const date = dayjs(dateStr, "ddd, MMM D, hh:mm A");
+  return date.date();
+};
+
 const MonthView: React.FC<CalendarProps> = ({
   currentDate,
   events,
   onEventClick,
+  deleteEvents,
 }) => {
   const monthDays = getMonthDays(currentDate);
 
@@ -52,12 +64,6 @@ const MonthView: React.FC<CalendarProps> = ({
         {monthDays.map((date) => {
           const isToday =
             new Date().toDateString() === date.toDate().toDateString();
-          // Filter events that match the current date
-          const dayEvents = events?.filter(
-            (event) =>
-              dayjs(event.start_time).isSame(date, "day") ||
-              dayjs(event.end_time).isSame(date, "day")
-          );
 
           return (
             <div
@@ -65,38 +71,55 @@ const MonthView: React.FC<CalendarProps> = ({
               className="h-20 rounded cursor-pointer border border-gray-300 p-2 relative"
             >
               {isToday ? (
-                <span className="text-indigo-500 font-semibold">{date.date()}</span>
+                <span className="text-indigo-500 font-semibold">
+                  {date.date()}
+                </span>
               ) : (
                 <span>{date.date()}</span>
               )}
 
-              {/* Render Events */}
-              {dayEvents?.length > 0 && (
-                <div className="mt-1">
-                  {dayEvents.map((event, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => onEventClick(event)}
-                      className="block mt-1 bg-blue-300 rounded p-1 text-xs"
-                    >
-                      {event.event_name}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* Add Events Button */}
               <AddEvents
                 triggerButton={
                   <div
                     className="absolute inset-0 flex justify-center items-center cursor-pointer 
-                  hover:bg-gradient-to-r hover:from-indigo-100 hover:via-purple-100 hover:to-pink-100 rounded text-white hover:text-blue-600"
+                  hover:bg-gradient-to-r hover:from-indigo-100 group hover:via-purple-100 hover:to-pink-100 rounded text-white hover:text-blue-600"
                   >
-                    <span className="text-xs">+ Add Event</span>
+                    <span className="text-xs hidden group-hover:block">
+                      + Add Event
+                    </span>
                   </div>
                 }
                 onEventClick={onEventClick}
               />
+
+              {events
+                .filter(
+                  (event) =>
+                    getDayFromDateString(formattedTime(event.start_time)) ===
+                    date.date()
+                )
+                .map((event) => {
+                  return (
+                    <div
+                      key={event.id}
+                      className={`z-50 cursor-pointer absolute w-[92%] left-1 bottom-1 rounded p-2 py-1 text-xs flex justify-between items-start ${ColourSelector(
+                        event.color
+                      )}`}
+                    >
+                      <div>
+                        <p className="font-semibold">{event.event_name}</p>
+                        <p className="text-xs">{event.stay_duration}</p>
+                      </div>
+
+                      <button
+                        onClick={() => deleteEvents(event.id)}
+                        className="absolute top-2 right-2 text-red-600 cursor-pointer"
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  );
+                })}
             </div>
           );
         })}

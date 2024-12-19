@@ -21,6 +21,7 @@ import {
 } from "../ui/form";
 import { useState } from "react";
 import { IdGenerator } from "@/constants/id-generator";
+import { Label } from "../ui/label";
 
 interface EventsProps {
   triggerButton: React.ReactNode;
@@ -75,6 +76,8 @@ const calculateDuration = (startTime: string, endTime: string) => {
 
 const AddEvents = ({ triggerButton, onEventClick }: EventsProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [color, setColor] = useState("red");
+  const [activeColor, setActiveColor] = useState("red");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -91,6 +94,7 @@ const AddEvents = ({ triggerButton, onEventClick }: EventsProps) => {
     const stayDuration = calculateDuration(data.start_time, data.end_time);
     const newData = {
       id: IdGenerator(),
+      color: color,
       event_name: data.event_name ?? "",
       description: data.description ?? "",
       start_time: data.start_time ?? "",
@@ -140,6 +144,32 @@ const AddEvents = ({ triggerButton, onEventClick }: EventsProps) => {
                   />
                 )
               )}
+
+              {/* set the color for events */}
+              <div className="mt-2 flex flex-col">
+                <Label>Choose Colour</Label>
+                <div className="flex space-x-4 mt-2">
+                  {["red", "green", "orange", "indigo"].map((clr) => (
+                    <span
+                      key={clr}
+                      aria-label={`Choose ${clr}`}
+                      title={`Choose ${clr}`}
+                      style={{
+                        backgroundColor: clr,
+                      }}
+                      className={`w-5 h-5 rounded cursor-pointer m-1 ${
+                        activeColor === clr
+                          ? "ring-2 ring-offset-1 ring-" + clr + "-500"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        setActiveColor(clr);
+                        setColor(clr);
+                      }}
+                    ></span>
+                  ))}
+                </div>
+              </div>
 
               <DialogFooter>
                 <Button type="submit" className="bg-blue-500 text-xs">

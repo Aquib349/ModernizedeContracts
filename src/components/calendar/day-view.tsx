@@ -3,6 +3,7 @@ import AddEvents from "./add-events";
 import CalendarEvents from "./calendar-events";
 import isBetween from "dayjs/plugin/isBetween";
 import { Trash2 } from "lucide-react";
+import { ColourSelector } from "@/constants/color-selector";
 
 dayjs.extend(isBetween);
 
@@ -10,6 +11,7 @@ interface CalendarProps {
   currentDate: dayjs.Dayjs;
   events: {
     id: string;
+    color: string;
     event_name: string;
     description: string;
     stay_duration: string;
@@ -35,15 +37,15 @@ const DayView = ({
 }: CalendarProps) => {
   // helper function to check if the time falls between the hour range
   function calculateEventPosition(startTime: string, endTime: string) {
-    const pixelsPerHour = 64; // 1 hour = 64px
+    const pixelsPerHour = 64;
     const parseTimeToMinutes = (timeStr: string) => {
       const [hours, minutes] = timeStr.split(":").map(Number);
-      return hours * 60 + minutes; // Total minutes from midnight
+      return hours * 60 + minutes;
     };
 
     const startMinutes = parseTimeToMinutes(startTime);
     const endMinutes = parseTimeToMinutes(endTime);
-    const durationMinutes = Math.max(endMinutes - startMinutes, 20); // Ensure minimum height
+    const durationMinutes = Math.max(endMinutes - startMinutes, 20);
 
     return {
       top: (startMinutes / 60) * pixelsPerHour,
@@ -53,7 +55,7 @@ const DayView = ({
 
   return (
     <>
-      <CalendarEvents EventData={events} />
+      <CalendarEvents EventData={events} deleteEvents={deleteEvents} />
       <div className="mt-2 p-4 border rounded relative h-auto">
         <h2 className="text-lg font-bold mb-4">
           {currentDate.format("dddd, MMMM D, YYYY")}
@@ -89,7 +91,6 @@ const DayView = ({
               event.start_time,
               event.end_time
             );
-
             return (
               <div
                 key={event.id}
@@ -98,10 +99,12 @@ const DayView = ({
                   top: `${top}px`,
                   height: `${height}px`,
                 }}
-                className="left-16 cursor-pointer right-0 bg-red-100 border-l-4 border-red-300 rounded-lg
-                p-2 flex justify-between items-start text-red-500 shadow-md"
+                className={`left-16 cursor-pointer right-0 rounded-lg
+                p-2 flex justify-between items-start ${ColourSelector(
+                  event.color
+                )}`}
               >
-                <div>
+                <div className="flex space-x-4 items-center">
                   <p className="font-semibold">{event.event_name}</p>
                   <p className="text-xs">{event.description}</p>
                 </div>
