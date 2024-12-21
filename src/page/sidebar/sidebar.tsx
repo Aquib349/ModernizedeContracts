@@ -13,7 +13,6 @@ import { Link, useLocation } from "react-router-dom";
 
 function GenerativeSidebar() {
   const { active, setActive } = useActiveContext();
-
   const [favoriteOpen, setFavoriteOpen] = useState(false);
   const [recentlyOpen, setRecentlyOpen] = useState(false);
   const location = useLocation();
@@ -22,21 +21,18 @@ function GenerativeSidebar() {
     <div className="generative-sidebar p-2 fixed">
       <div className="main">
         <div className="text-sm">
-          {location.pathname === "/setting" ? (
+          {location.pathname === "/business-setting" ? (
             <div className="relative w-full">
               <div
-                className={`flex items-center justify-between font-medium cursor-pointer w-full ${
-                  active === "/favorite" ||
-                  active === "/favorite/contracts" ||
-                  active === "/favorite/documents" ||
-                  active === "/favorite/recently-accessed"
+                className={`flex items-center justify-between font-medium cursor-pointer w-full border ${
+                  active === "/settings" || active === "/settings/pipeline"
                     ? "text-black"
                     : "text-gray-500"
                 }`}
                 onClick={() => {
                   setFavoriteOpen(!favoriteOpen);
                   setRecentlyOpen(false);
-                  setActive("/favorite");
+                  setActive("/pipeline");
                 }}
               >
                 <div className="flex items-center gap-2">
@@ -44,7 +40,7 @@ function GenerativeSidebar() {
                   Pipeline
                 </div>
                 <ChevronRight
-                  className={`w-4 h-4 transform transition-transform duration-300  ${
+                  className={`w-4 h-4 transform transition-transform duration-300 ${
                     favoriteOpen ? "rotate-90" : ""
                   }`}
                 />
@@ -52,7 +48,7 @@ function GenerativeSidebar() {
               <div
                 className={`w-[1.5px] bg-slate-100 absolute left-[0.4rem] transition-all duration-300`}
                 style={{
-                  height: (favoriteOpen ? 65 : 0) + "px",
+                  height: favoriteOpen ? "65px" : "0",
                 }}
               ></div>
               <div
@@ -62,69 +58,82 @@ function GenerativeSidebar() {
               >
                 <div className="pl-1 mt-4 space-y-3">
                   <div className="relative w-full">
-                    <div className="flex items-center justify-between cursor-pointer w-full">
-                      <div
-                        className={`flex items-center gap-1 font-medium ${
-                          active === "/favorite/contracts" ? "text-black" : ""
-                        }`}
-                      >
-                        <Minus className="text-slate-200" />
-                        Document
-                      </div>
-                    </div>
+                    <Link
+                      to=""
+                      className={`flex items-center gap-1 font-medium ${
+                        active === "/favorite/contracts" ? "text-black" : ""
+                      }`}
+                    >
+                      <Minus className="text-slate-200" />
+                      Document
+                    </Link>
                   </div>
 
+                  {/* My Documents */}
                   <div className="relative w-full">
                     <div
                       className="flex items-center justify-between cursor-pointer w-full"
-                      onClick={() => {
-                        setRecentlyOpen(!recentlyOpen);
-                        setActive("/favorite/recently-accessed");
-                      }}
+                      onClick={() => setActive("/favorite/documents")}
                     >
-                      <div
+                      <Link
+                        to="/documents"
                         className={`flex items-center gap-1 font-medium ${
-                          active === "/favorite/recently-accessed"
-                            ? "text-black"
-                            : ""
+                          active === "/favorite/documents" ? "text-black" : ""
                         }`}
                       >
                         <Minus className="text-slate-200" />
                         Renewal
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          ) : location.pathname === "/business-area" ? (
+          ) : location.pathname === "/business-area" ||
+            location.pathname === "/business-area/pipeline/document" ? (
             <div>
               {/* BA Dashboard */}
-              <div className="font-medium flex items-center gap-2 cursor-pointer">
+              <Link
+                to="/business-area"
+                className={`font-medium flex items-center gap-2 cursor-pointer ${
+                  location.pathname === "/business-area" ||
+                  active === "business-area"
+                    ? "text-black"
+                    : "text-gray-400"
+                }`}
+                onClick={() => {
+                  setActive("business-area");
+                }}
+              >
                 <LayoutDashboard className="w-4 h-4" />
                 BA Dashboard
-              </div>
+              </Link>
+
               {/* pipeline */}
               <div className="relative w-full mt-2">
                 <div
                   className={`flex items-center justify-between font-medium cursor-pointer w-full ${
-                    active === "/pipeline/document" ||
-                    active === "/pipeline/renewal"
+                    active === "/business-area/pipeline/document" ||
+                    active === ""
                       ? "text-black"
                       : "text-gray-500"
                   }`}
                   onClick={() => {
                     setFavoriteOpen(!favoriteOpen);
                     setRecentlyOpen(false);
-                    setActive("/pipeline");
+                    setActive("/business-area/pipeline/document");
                   }}
                 >
-                  <div className="flex items-center gap-2">
+                  <Link
+                    to="/business-area/pipeline/document"
+                    className={`flex items-center gap-2`}
+                    onClick={() => setActive("business-area/pipeline/document")}
+                  >
                     <ListEnd className="w-4 h-4" />
                     Pipeline
-                  </div>
+                  </Link>
                   <ChevronRight
-                    className={`w-4 h-4 transform transition-transform duration-300  ${
+                    className={`w-4 h-4 transform transition-transform duration-300 ${
                       favoriteOpen ? "rotate-90" : ""
                     }`}
                   />
@@ -132,7 +141,7 @@ function GenerativeSidebar() {
                 <div
                   className={`w-[1.5px] bg-slate-100 absolute left-[0.4rem] transition-all duration-300`}
                   style={{
-                    height: (favoriteOpen ? 65 : 0) + "px",
+                    height: favoriteOpen ? "65px" : "0",
                   }}
                 ></div>
                 <div
@@ -142,31 +151,43 @@ function GenerativeSidebar() {
                 >
                   <div className="pl-1 mt-4 space-y-3">
                     <div className="relative w-full">
-                      <div
-                        className={`flex items-center gap-1 font-medium ${
-                          active === "/business-area/pipeline"
-                            ? "text-black"
-                            : ""
-                        }`}
-                      >
-                        <Minus className="text-slate-200" />
-                        Document
+                      <div className="flex items-center justify-between cursor-pointer w-full">
+                        <Link
+                          to="/business-area/pipeline/document"
+                          className={`flex items-center gap-1 font-medium ${
+                            active === "/business-area/pipeline/document"
+                              ? "text-black"
+                              : ""
+                          }`}
+                          onClick={() => {
+                            setRecentlyOpen(!recentlyOpen);
+                            setActive("/business-area/pipeline/document");
+                          }}
+                        >
+                          <Minus className="text-slate-200" />
+                          Document
+                        </Link>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Recently Accessed */}
-                  <div className="relative w-full pl-1">
-                    <div className="flex items-center justify-between cursor-pointer w-full">
+                    <div className="relative w-full">
                       <div
-                        className={`flex items-center gap-1 font-medium ${
-                          active === "/favorite/recently-accessed"
-                            ? "text-black"
-                            : ""
-                        }`}
+                        className="flex items-center justify-between cursor-pointer w-full"
+                        onClick={() => {
+                          setRecentlyOpen(!recentlyOpen);
+                          setActive("/favorite/recently-accessed");
+                        }}
                       >
-                        <Minus className="text-slate-200" />
-                        Renewal
+                        <div
+                          className={`flex items-center gap-1 font-medium ${
+                            active === "/favorite/recently-accessed"
+                              ? "text-black"
+                              : ""
+                          }`}
+                        >
+                          <Minus className="text-slate-200" />
+                          Renewal
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -179,7 +200,7 @@ function GenerativeSidebar() {
                 location.pathname.includes("/business-area")
                   ? "hidden"
                   : "block"
-              } `}
+              }`}
             >
               {/* My Work */}
               <div className="font-medium">
@@ -226,12 +247,12 @@ function GenerativeSidebar() {
                     setActive("/favorite");
                   }}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className={`flex items-center gap-2`}>
                     <Folder className="w-4 h-4" />
                     My Favorite
                   </div>
                   <ChevronRight
-                    className={`w-4 h-4 transform transition-transform duration-300  ${
+                    className={`w-4 h-4 transform transition-transform duration-300 ${
                       favoriteOpen ? "rotate-90" : ""
                     }`}
                   />
@@ -239,7 +260,7 @@ function GenerativeSidebar() {
                 <div
                   className={`w-[1.5px] bg-slate-100 absolute left-[0.4rem] transition-all duration-300`}
                   style={{
-                    height: (favoriteOpen ? 100 : 0) + "px",
+                    height: favoriteOpen ? "100px" : "0",
                   }}
                 ></div>
                 <div
@@ -310,11 +331,6 @@ function GenerativeSidebar() {
               </div>
             </div>
           )}
-
-          <div className={`${location.pathname.includes("/settings") ? "block" : "hidden"}`}></div>
-          <div className={`${location.pathname.includes("/settings") ? "block" : "hidden"}`}></div>
-          <div className={`${location.pathname.includes("/settings") ? "block" : "hidden"}`}></div>
-
         </div>
       </div>
     </div>

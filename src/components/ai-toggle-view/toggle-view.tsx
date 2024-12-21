@@ -3,7 +3,6 @@ import ai_logo from "../../assets/image.png";
 
 interface ToggleViewProps {
   heading: string;
-  businessArea: boolean;
 }
 
 const ToggleView: React.FC<ToggleViewProps> = ({ heading }) => {

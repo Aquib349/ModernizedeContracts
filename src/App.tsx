@@ -19,6 +19,7 @@ import SettingDashboard from "./page/business area/Dashboard";
 import BADashboard from "./page/business area/Dashboard";
 
 import Setting from "./page/setting/Setting";
+import DocumentPipeline from "./page/business area/pipeline/document pipeline/document-pipeline";
 
 
 function App() {
@@ -98,22 +99,26 @@ const Router = createBrowserRouter([
             path: "/business-area",
             element: <BusinessAreaDashboard />,
           },
-        ]
-      },
-      {
-        path: "business-setting",
-        element: (
-          <ViewContextProvider>
-            <SettingDashboard />,
-          </ViewContextProvider>
-        ),
-        children: [
           {
-            path: "/business-setting",
-            element: <Setting />,
+            path:"/business-area/pipeline/document",
+            element : <DocumentPipeline/>
           }
         ]
       },
+      // {
+      //   path: "settings",
+      //   element: (
+      //     <ViewContextProvider>
+      //       <SettingDashboard />,
+      //     </ViewContextProvider>
+      //   ),
+      //   children: [
+      //     {
+      //       path: "/settings/",
+      //       element: <Setting />,
+      //     }
+      //   ]
+      // },
     ],
 
   },

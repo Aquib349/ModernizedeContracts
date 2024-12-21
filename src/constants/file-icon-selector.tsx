@@ -8,7 +8,7 @@ interface IconSelectorProps {
 }
 
 function IconSelector({ icon }: IconSelectorProps) {
-  const name = icon.split(".")[1];
+  const name = icon?.split(".")[1];
   function chooseIcon() {
     switch (name) {
       case "pdf":
