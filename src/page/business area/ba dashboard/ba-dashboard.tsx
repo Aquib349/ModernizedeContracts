@@ -54,7 +54,7 @@ function BusinessAreaDashboard() {
                     Allviews={["graph", "tabular"]}
                 />
 
-                {getView("contractRepositoryOverview") === "tabular" ? (
+                {getView("contractRepositoryOverview") === "graph" ? (
                     <ContractRepositoryOverview />
                 ) : (
                     <ReviewInsightsTabular columns={columns} data={dataItem} />
@@ -129,7 +129,7 @@ function BusinessAreaDashboard() {
                     Allviews={["graph", "tabular"]}
                 />
 
-                {getView("contractValueOverview") === "tabular" ? (
+                {getView("contractValueOverview") === "graph" ? (
                     <ContractValueOverview />
                 ) : (
                     <ReviewInsightsTabular columns={columns1} data={data1} />
@@ -148,7 +148,7 @@ function BusinessAreaDashboard() {
                     Allviews={["graph", "tabular"]}
                 />
 
-                {getView("contractRenewalPipeline") === "tabular" ? (
+                {getView("contractRenewalPipeline") === "graph" ? (
                     <ContractRenewalPipeline />
                 ) : (
                     <ReviewInsightsTabular columns={columns2} data={data2} />
@@ -164,10 +164,10 @@ function BusinessAreaDashboard() {
                 <ToggleButton
                     title="New Contracts and Contract Intake Metrics"
                     componentKey="contractIntakeMetrix"
-                    Allviews={["graph", "tabular"]}
+                    Allviews={["graph", "tabular",]}
                 />
 
-                {getView("contractIntakeMetrix") === "tabular" ? (
+                {getView("contractIntakeMetrix") === "graph" ? (
                     <ContractIntakeMetrix />
                 ) : (
                     <ReviewInsightsTabular columns={columns3} data={data3} />
@@ -186,7 +186,7 @@ function BusinessAreaDashboard() {
                     Allviews={["graph", "tabular"]}
                 />
 
-                {getView("contractIssueMetrix") === "tabular" ? (
+                {getView("contractIssueMetrix") === "graph" ? (
                     <ContractIssueMetrix />
                 ) : (
                     <ReviewInsightsTabular columns={columns4} data={data4} />
