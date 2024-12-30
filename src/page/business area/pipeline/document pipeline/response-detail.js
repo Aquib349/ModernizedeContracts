@@ -1,0 +1,10 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, } from "@/components/ui/sheet";
+import { bytesToMB } from "@/constants/byte-to-mb-converter";
+import IconSelector from "@/constants/file-icon-selector";
+import { Download } from "lucide-react";
+const ResponseDetail = ({ TriggerButton, sheetData }) => {
+    return (_jsxs(Sheet, { children: [_jsx(SheetTrigger, { asChild: true, children: TriggerButton }), _jsxs(SheetContent, { style: { width: "600px", maxWidth: "none" }, className: "text-sm", children: [_jsxs(SheetHeader, { children: [_jsx(SheetTitle, { children: (sheetData === null || sheetData === void 0 ? void 0 : sheetData.DocumentName) || "Document Details" }), _jsxs(SheetDescription, { children: ["Details about the ", (sheetData === null || sheetData === void 0 ? void 0 : sheetData.DocumentName) || "document"] })] }), _jsxs("div", { className: "details space-y-2 mt-4", children: [_jsxs("p", { children: ["Is OCR Done: ", (sheetData === null || sheetData === void 0 ? void 0 : sheetData.IsOCRed) ? "Yes" : "No"] }), _jsxs("p", { children: ["Size:", " ", (sheetData === null || sheetData === void 0 ? void 0 : sheetData.Size) ? bytesToMB(sheetData === null || sheetData === void 0 ? void 0 : sheetData.Size).toFixed(2) : "N/A", " MB"] }), _jsxs("p", { className: "flex items-center", children: ["Document Type:", " ", (sheetData === null || sheetData === void 0 ? void 0 : sheetData.Extension) && (_jsx(IconSelector, { icon: sheetData === null || sheetData === void 0 ? void 0 : sheetData.Extension }))] }), (sheetData === null || sheetData === void 0 ? void 0 : sheetData.DocumentUrl) && (_jsx(Button, { className: "bg-blue-600 h-9 text-xs hover:bg-blue-700", children: _jsxs("a", { href: sheetData === null || sheetData === void 0 ? void 0 : sheetData.DocumentUrl, className: "flex items-center space-x-2", target: "_blank", rel: "noopener noreferrer", children: [_jsx("span", { children: "Download File" }), _jsx(Download, { size: 14 })] }) }))] })] })] }));
+};
+export default ResponseDetail;

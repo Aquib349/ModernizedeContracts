@@ -1,0 +1,20 @@
+import axios from "axios";
+const BaseUrl = import.meta.env.VITE_BASE_URL;
+// create an instance of axios with base url
+export const apiClient = axios.create({
+    baseURL: BaseUrl,
+    headers: {
+        "Content-Type": "application/json",
+        "eContracts-ApiKey": "4oTDTxvMgJjbGtZJdFAnwBCroe8uoVGvk+0fR3bHzeqs9KDPOJAzuzvXh9TSuiUvl7r2dhNhaNOcv598qie65A==",
+    },
+});
+// handle API Error
+export const handleApiError = (error) => {
+    var _a;
+    if (axios.isAxiosError(error)) {
+        console.log(((_a = error.response) === null || _a === void 0 ? void 0 : _a.data) || error.message);
+    }
+    else {
+        console.log(error);
+    }
+};

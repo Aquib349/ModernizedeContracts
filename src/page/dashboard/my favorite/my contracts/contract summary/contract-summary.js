@@ -1,0 +1,20 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { useContext } from "react";
+import { History } from "lucide-react";
+import ContractLifeCycle from "./list-view/contract-life-cycle";
+import AcitivityPlan from "./list-view/activity-plan";
+import ReviewInsights from "./list-view/review-insights";
+import ContractHighLights from "./list-view/contract-highlights";
+import ActivityTimeline from "./list-view/activity-timeline";
+import { ViewContext } from "@/context/viewContext";
+import ToggleButton from "@/components/ai-toggle-view/toggle-button";
+import ContractLifeCycleGraph from "./graphical-view/contract-life-cycle-chart";
+import ActivityPlanGraph from "./graphical-view/activity-plan";
+import ReviewInsightsGraph from "./graphical-view/review-insights";
+import ReviewInsightsTabular from "./tabular-view/review-insights";
+import { contractSummerycolumns, contractSummerydata } from "@/constants/CustomData";
+const ContractSummary = () => {
+    const { getView } = useContext(ViewContext);
+    return (_jsx(_Fragment, { children: _jsxs("div", { className: "contract-summary space-y-2 w-[70%] mx-auto", children: [_jsx("div", { className: "text-sm", children: _jsxs("div", { className: "bg-gray-50 p-4 rounded-md text-gray-500", children: [_jsxs("p", { className: "italic text-slate-500 text-xs flex items-center gap-1", children: [_jsx(History, { size: 16, className: "cursor-pointer" }), "Time Since Last Update: 2 hours ago"] }), _jsxs("div", { className: "flex items-center gap-x-3", children: [_jsx("span", { className: "font-medium w-1/6", children: "Contract Title:" }), _jsx("p", { className: "text-left flex-grow", children: "Aviation Planning Consulting Services for Chicago O'Hare" })] }), _jsxs("div", { className: "flex items-center gap-x-3", children: [_jsx("span", { className: "font-medium w-1/6", children: "Contract Type:" }), _jsx("p", { className: "text-left flex-grow", children: "Consulting Agreement" })] }), _jsxs("div", { className: "flex items-center gap-x-3", children: [_jsx("span", { className: "font-medium w-1/6", children: "Counterparty:" }), _jsx("p", { className: "text-left flex-grow", children: "Chicago O'Hare Airport" })] })] }) }), _jsxs("div", { className: "bg-gray-50 p-4 rounded-md", children: [_jsx(ToggleButton, { title: "Lifecycle Progress Bar", componentKey: "contractLifeCycle", Allviews: ["list", "graph"] }), getView("contractLifeCycle") === "list" ? (_jsx(ContractLifeCycle, {})) : (_jsx(ContractLifeCycleGraph, {}))] }), _jsxs("div", { className: "bg-gray-50 p-4 rounded-md", children: [_jsx(ToggleButton, { title: "Activity Plan", componentKey: "activityPlan", Allviews: ["list", "graph"] }), getView("activityPlan") === "list" ? (_jsx(AcitivityPlan, {})) : (_jsx(ActivityPlanGraph, {}))] }), _jsxs("div", { className: "bg-gray-50 p-4 rounded-md", children: [_jsx(ToggleButton, { title: "Review Insights", componentKey: "reviewInsights", Allviews: ["list", "graph", "tabular"] }), getView("reviewInsights") === "list" ? (_jsx(ReviewInsights, {})) : getView("reviewInsights") === "graph" ? (_jsx(ReviewInsightsGraph, {})) : (_jsx(ReviewInsightsTabular, { columns: contractSummerycolumns, data: contractSummerydata }))] }), _jsxs("div", { className: "bg-gray-50 p-4 rounded-md", children: [_jsx(ToggleButton, { title: "Contract Highlights", componentKey: "contractHighlights", Allviews: ["list"] }), _jsx(ContractHighLights, {})] }), _jsxs("div", { className: "bg-gray-50 p-4 rounded-md", children: [_jsx(ToggleButton, { title: "Activity Timeline", componentKey: "activityTimeline", Allviews: ["list"] }), _jsx(ActivityTimeline, {})] })] }) }));
+};
+export default ContractSummary;
