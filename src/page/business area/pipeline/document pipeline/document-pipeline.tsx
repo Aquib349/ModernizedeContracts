@@ -1,103 +1,154 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LoaderCircle, Menu } from "lucide-react";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Table from "./table";
+import { ArrowLeft, ArrowRight, Plus } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import Table from "./data-table";
+import { usePipeline } from "@/hooks/use-pipeline";
+import { AllBatches, batchDocument, DocumentIntake } from "@/types";
+import DocumentPipelineSkeleton from "@/skeleton/document-pipeline";
+import { useLoading } from "@/hooks/use-loading";
 
 const DocumentPipeline = () => {
-  const [allBatches, setAllBatches] = useState([]);
-  const [selectedTab, setSelectedTab] = useState("");
-  const [TableRecord, setTableRecord] = useState([]);
+  const { loading } = useLoading();
+  const {
+    AllBatch,
+    batchDocuments,
+    setBatchDocuments,
+    getAllBatchDocuments,
+    getDocumentDetail,
+  } = usePipeline();
+  const [batches, setBatches] = useState<AllBatches[]>([]);
+  const [selectedTab, setSelectedTab] = useState<string>();
+  const [sheetData, setSheetData] = useState<DocumentIntake | null>(null);
+  const tabsContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // function to get all the batch
-  async function getAllBatches() {
-    const header = {
-      "eContracts-ApiKey":
-        "4oTDTxvMgJjbGtZJdFAnwBCroe8uoVGvk+0fR3bHzeqs9KDPOJAzuzvXh9TSuiUvl7r2dhNhaNOcv598qie65A==",
-    };
-    try {
-      const batch = await axios.get(
-        "https://api-otbt-econ-test.azurewebsites.net/api/accounts/3Xae5Udc/pipelineBatches",
-        { headers: header }
-      );
-      setAllBatches(batch.data);
-      getTableRecord(batch.data[0]?.RowKey);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const getSheetData = async (id: string) => {
+    const response: DocumentIntake | null = await getDocumentDetail(id);
+    setSheetData(response);
+  };
 
-  async function getTableRecord(RowKey: string) {
-    const header = {
-      "eContracts-ApiKey":
-        "4oTDTxvMgJjbGtZJdFAnwBCroe8uoVGvk+0fR3bHzeqs9KDPOJAzuzvXh9TSuiUvl7r2dhNhaNOcv598qie65A==",
-    };
-    try {
-      const response = await axios.get(
-        `https://api-otbt-econ-test.azurewebsites.net/api/accounts/3Xae5Udc/documentInTakePipelines?batchId=${RowKey}`,
-        { headers: header }
-      );
-      setTableRecord(response.data);
-    } catch (error) {}
-  }
-
+  // Sync batches with AllBatch from the context
   useEffect(() => {
-    getAllBatches();
-  }, []);
+    if (AllBatch?.length > 0) {
+      setBatches(AllBatch);
+      setSelectedTab(AllBatch[0]?.BatchName);
+    }
+  }, [AllBatch]);
 
-  if (allBatches.length <= 0) {
+  // Function to fetch batch documents
+  async function getAllBatchDocument(id: string) {
+    const response: batchDocument[] = await getAllBatchDocuments(id);
+    setBatchDocuments(response);
+  }
+
+  // Scroll tabs container left or right
+  const scrollTabs = (direction: "left" | "right") => {
+    if (tabsContainerRef.current) {
+      const scrollAmount = direction === "left" ? -200 : 200;
+      tabsContainerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+      console.log(scrollAmount);
+    }
+  };
+
+  // Function to add new batch
+  const addNewBatch = () => {
+    const newBatch: AllBatches = {
+      BatchName: `Batch ${Date.now()}`,
+      PipelineType: "TypeA",
+      Status: "New",
+      Created: new Date().toISOString(),
+      Modified: null,
+      NumberOfItems: 0,
+      ProcessedItems: 0,
+      FailedItems: 0,
+      PartitionKey: Math.floor(Math.random() * 1000),
+      RowKey: `row_${Date.now()}`,
+      Timestamp: new Date().toISOString(),
+      ETag: "",
+    };
+
+    setBatches((prevBatches) => {
+      const updatedBatches = [...prevBatches, newBatch];
+      setSelectedTab(newBatch.BatchName);
+      return updatedBatches;
+    });
+
+    getAllBatchDocument(newBatch.RowKey);
+  };
+
+  // Handle empty state for AllBatch
+  if (!AllBatch || AllBatch.length === 0) {
     return (
-      <div className="text-center">
-        {/* <LoaderCircle /> */}
-        loading...
-      </div>
+      <>
+        <DocumentPipelineSkeleton />
+      </>
     );
   }
 
   return (
-    <>
-      <div className="document-intake-component">
-        <div className="main pr-2">
-          <div className="flex items-center space-x-2">
-            <div className="batch-files w-full">
-              <Tabs defaultValue={allBatches[0]?.BatchName} className="w-full">
-                <TabsList className="grid w-full grid-cols-4">
-                  {allBatches.map((batch) => (
-                    <TabsTrigger
-                      key={batch.RowKey}
-                      value={batch.BatchName}
-                      onClick={() => getTableRecord(batch.RowKey)}
-                    >
-                      {batch.BatchName}
-                    </TabsTrigger>
-                  ))}
+    <div className="document-intake-component">
+      <div className="main">
+        <div className="batch-files w-full">
+          <Tabs value={selectedTab} onValueChange={setSelectedTab}>
+            <div className="relative w-full flex items-center">
+              <button
+                onClick={() => scrollTabs("left")}
+                className="absolute left-0 z-10 p-3 hover:bg-white rounded-full bg-[#fafafa]"
+              >
+                <ArrowLeft size={14} />
+              </button>
+
+              <TabsList
+                ref={tabsContainerRef}
+                className="flex justify-start w-full overflow-x-auto rounded-full whitespace-nowrap px-10 no-scrollbar bg-[#fafafa]"
+              >
+                {batches.map((batch) => (
                   <TabsTrigger
-                    value="new tab"
-                    onClick={() => setSelectedTab("new tab")}
+                    key={batch.RowKey}
+                    value={batch.BatchName}
+                    onClick={() => {
+                      getAllBatchDocument(batch.RowKey);
+                      setSelectedTab(batch.BatchName);
+                    }}
+                    className="flex-shrink-0 px-4 py-2"
                   >
-                    New Batch
+                    {batch.BatchName.length > 3
+                      ? `${batch.BatchName.slice(0, 3)}..`
+                      : batch.BatchName}
                   </TabsTrigger>
-                </TabsList>
-                {allBatches.map((batch) => (
-                  <TabsContent key={batch.RowKey} value={batch.BatchName}>
-                    <Table Record={TableRecord} />
-                  </TabsContent>
                 ))}
-                <TabsContent value="new tab">
-                  <div>Create a new batch here.</div>
-                </TabsContent>
-              </Tabs>
+                <TabsTrigger
+                  value="new tab"
+                  className="flex-shrink-0 px-4 py-2"
+                  onClick={addNewBatch}
+                >
+                  <Plus size={18} />
+                </TabsTrigger>
+              </TabsList>
+
+              <button
+                onClick={() => scrollTabs("right")}
+                className="absolute right-0 z-10 p-3 hover:bg-white rounded-full bg-[#fafafa]"
+              >
+                <ArrowRight size={14} />
+              </button>
             </div>
-          </div>
+            {batches.map((batch) => (
+              <TabsContent key={batch.RowKey} value={batch.BatchName}>
+                <Table
+                  Record={batchDocuments}
+                  loading={loading}
+                  getSheetData={getSheetData}
+                  sheetData={sheetData}
+                />
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

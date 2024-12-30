@@ -5,7 +5,7 @@ const CalendarView: React.FC = () => {
   return (
     <>
       <div className="calendar-list-view">
-        <div className="main bg-white p-4 text-sm rounded-md">
+        <div className="main text-sm pt-2 rounded-md">
           <CalendarContextProvider>
             <Calendar />
           </CalendarContextProvider>

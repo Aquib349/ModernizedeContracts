@@ -9,9 +9,6 @@ const Calendar: React.FC = () => {
     <>
       <div className="calendar-component">
         <div className="main space-y-2">
-          {/* toggle view */}
-          <ToggleView heading={"AI Generated Calendar Events"} />
-
           {/* calendar header */}
           <CalendarHeader views={view} setView={setView} />
 

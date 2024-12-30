@@ -18,7 +18,7 @@ function GenerativeSidebar() {
   const location = useLocation();
 
   return (
-    <div className="generative-sidebar p-2 fixed">
+    <div className="generative-sidebar p-2 fixed top-[3.5rem] bg-white h-full">
       <div className="main">
         <div className="text-sm">
           {location.pathname === "/business-setting" ? (
@@ -96,10 +96,10 @@ function GenerativeSidebar() {
               <Link
                 to="/business-area"
                 className={`font-medium flex items-center gap-2 cursor-pointer ${
-                  location.pathname === "/business-area" ||
-                  active === "business-area"
+                  active === "business-area" ||
+                  location.pathname === "/business-area"
                     ? "text-black"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }`}
                 onClick={() => {
                   setActive("business-area");
@@ -113,25 +113,24 @@ function GenerativeSidebar() {
               <div className="relative w-full mt-2">
                 <div
                   className={`flex items-center justify-between font-medium cursor-pointer w-full ${
-                    active === "/business-area/pipeline/document" ||
-                    active === ""
+                    active === "/business-area/pipeline" ||
+                    active === "/business-area/pipeline/document"
                       ? "text-black"
                       : "text-gray-500"
                   }`}
                   onClick={() => {
                     setFavoriteOpen(!favoriteOpen);
                     setRecentlyOpen(false);
-                    setActive("/business-area/pipeline/document");
+                    setActive("/business-area/pipeline");
                   }}
                 >
-                  <Link
-                    to="/business-area/pipeline/document"
+                  <div
                     className={`flex items-center gap-2`}
-                    onClick={() => setActive("business-area/pipeline/document")}
+                    onClick={() => setActive("/business-area/pipeline")}
                   >
                     <ListEnd className="w-4 h-4" />
                     Pipeline
-                  </Link>
+                  </div>
                   <ChevronRight
                     className={`w-4 h-4 transform transition-transform duration-300 ${
                       favoriteOpen ? "rotate-90" : ""

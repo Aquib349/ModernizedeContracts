@@ -1,20 +1,13 @@
-import { CircleArrowRight } from "lucide-react";
-import ai_logo from "../../../../assets/image.png";
 import ContractUpdates from "./contract-updates";
 import MyWorkflows from "./my-workflows";
 import MyTask from "./my-task";
-import ToggleView from "@/components/ai-toggle-view/toggle-view";
 import CalendarList from "../../my calendar/list view/my-calendar-list";
 function Page() {
   return (
     <>
       <div className="ai-response-compoent">
         <div className="main text-sm">
-          {/* heading */}
-          <ToggleView heading="My Dashboard" />
-
-          {/* response contents */}
-          <div className="space-y-4">
+          <div className="space-y-4 w-[70%] mx-auto">
             <ContractUpdates />
             <MyWorkflows />
             <MyTask />

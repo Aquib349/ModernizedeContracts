@@ -1,39 +1,27 @@
-
-import { Outlet, createBrowserRouter } from "react-router-dom";
-import { ToggleMenuContextProvider } from "./context/SideMenuContext";
-import Navigation from "./shared/Navigation/Navigation";
-import Sidebar from "./shared/Sidebar/Sidebar";
-import { ViewContextProvider } from "./context/viewContext";
-import { ActiveContextProvider } from "./context/activeContext";
-import Dashboard from "./page/dashboard/Dashboard";
+import { createBrowserRouter, Outlet } from "react-router-dom";
+import Sidebar from "./shared/Sidebar/side-bar";
 import Page from "./page/dashboard/my priority/ai response/page";
-import Contract from "./page/dashboard/my favorite/my contracts/Contract";
-import DocumentTable from "./page/dashboard/my favorite/my documents/Document-table";
-import ContractSummary from "./page/dashboard/my favorite/my contracts/contract summary/contract-summary";
 import Calendar from "./page/dashboard/my calendar/calendar";
 import CalendarList from "./page/dashboard/my calendar/list view/my-calendar-list";
 import CalendarView from "./page/dashboard/my calendar/calendar view/my-calendar-calendar";
+import Contract from "./page/dashboard/my favorite/my contracts/Contract";
+import DocumentTable from "./page/dashboard/my favorite/my documents/Document-table";
+import ContractSummary from "./page/dashboard/my favorite/my contracts/contract summary/contract-summary";
 import DocumentUpload from "./page/dashboard/my favorite/my documents/document-upload";
+import { ViewContextProvider } from "./context/viewContext";
 import BusinessAreaDashboard from "./page/business area/ba dashboard/ba-dashboard";
-import SettingDashboard from "./page/business area/Dashboard";
-import BADashboard from "./page/business area/Dashboard";
-
-import Setting from "./page/setting/Setting";
+import Pipeline from "./page/business area/pipeline/pipeline";
 import DocumentPipeline from "./page/business area/pipeline/document pipeline/document-pipeline";
-
+import { LoadingContextProvider } from "./context/loading";
 
 function App() {
   return (
     <>
-      <div className="relative bg-gray-50 min-h-screen">
-        <ToggleMenuContextProvider>
-          <ActiveContextProvider>
-            <Navigation />
-            <Sidebar />
-            <Outlet />
-          </ActiveContextProvider>
-        </ToggleMenuContextProvider>
-      </div>
+      <Sidebar>
+        <LoadingContextProvider>
+          <Outlet />
+        </LoadingContextProvider>
+      </Sidebar>
     </>
   );
 }
@@ -45,82 +33,63 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <ViewContextProvider>
-            <Dashboard />
-          </ViewContextProvider>
-        ),
+        element: <Page />,
+      },
+      {
+        path: "calendar",
+        element: <Calendar />,
         children: [
           {
-            path: "/",
-            element: <Page />,
+            path: "/calendar/calendar-summary",
+            element: <CalendarList />,
           },
           {
-            path: "calendar",
-            element: <Calendar />,
-            children: [
-              {
-                path: "/calendar/calendar-summary",
-                element: <CalendarList />,
-              },
-              {
-                path: "/calendar",
-                element: <CalendarView />,
-              },
-            ],
-          },
-          {
-            path: "contracts",
-            element: <Contract />,
-          },
-          {
-            path: "documents",
-            element: <DocumentTable />,
-          },
-          {
-            path: "document-upload",
-            element: <DocumentUpload />,
-          },
-          {
-            path: "contractSummary",
-            element: <ContractSummary />,
+            path: "/calendar",
+            element: <CalendarView />,
           },
         ],
       },
       {
-        path: "business-area",
+        path: "contracts",
+        element: <Contract />,
+      },
+      {
+        path: "/contracts/contractSummary",
         element: (
           <ViewContextProvider>
-            <BADashboard />,
+            <ContractSummary />,
           </ViewContextProvider>
         ),
+      },
+      {
+        path: "documents",
+        element: <DocumentTable />,
         children: [
           {
-            path: "/business-area",
-            element: <BusinessAreaDashboard />,
+            path: "/documents/document-upload",
+            element: <DocumentUpload />,
           },
-          {
-            path:"/business-area/pipeline/document",
-            element : <DocumentPipeline/>
-          }
-        ]
+        ],
       },
-      // {
-      //   path: "settings",
-      //   element: (
-      //     <ViewContextProvider>
-      //       <SettingDashboard />,
-      //     </ViewContextProvider>
-      //   ),
-      //   children: [
-      //     {
-      //       path: "/settings/",
-      //       element: <Setting />,
-      //     }
-      //   ]
-      // },
+      {
+        path: "/business-area",
+        element: (
+          <ViewContextProvider>
+            <BusinessAreaDashboard />
+          </ViewContextProvider>
+        ),
+      },
+      {
+        path: "/pipeline",
+        element: <Pipeline />,
+        children: [
+          {
+            path: "/pipeline/document",
+            element: <DocumentPipeline />,
+          },
+        ],
+      },
     ],
-
   },
 ]);
 

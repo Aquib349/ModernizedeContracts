@@ -64,7 +64,7 @@ const WeekView = ({
   }
 
   return (
-    <div className="mt-8">
+    <div className="mt-4">
       <div className="grid grid-cols-8 border rounded-md">
         <div className="border-r p-2 text-center font-bold">Time</div>
         {daysOfWeek.map((day, index) => {

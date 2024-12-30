@@ -162,10 +162,10 @@ export default function DocumentTable() {
   });
 
   return (
-    <div className="main p-3 shadow text-sm bg-white relative">
+    <div className="text-sm space-y-4 relative">
       <SearchFilter placeholder="search document" />
       <div className="w-full">
-        <div className="absolute top-3 right-3 flex gap-1 items-center">
+        {/* <div className="absolute top-3 right-3 flex gap-1 items-center">
           <Link to="/document-upload">
             <Button variant="outline" className="h-9">
               <Upload size={16} />
@@ -197,8 +197,8 @@ export default function DocumentTable() {
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-        <div className="rounded-md border mt-6">
+        </div> */}
+        <div className="rounded-md border">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
@@ -248,7 +248,7 @@ export default function DocumentTable() {
             </TableBody>
           </Table>
         </div>
-        <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex items-center justify-end space-x-2 py-2">
           <div className="flex-1 text-sm text-muted-foreground">
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} row(s) selected.

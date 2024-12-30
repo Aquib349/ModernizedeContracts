@@ -9,41 +9,16 @@ import {
 } from "@/components/ui/sheet";
 import { bytesToMB } from "@/constants/byte-to-mb-converter";
 import IconSelector from "@/constants/file-icon-selector";
-import axios from "axios";
+import { DocumentIntake } from "@/types";
 import { Download } from "lucide-react";
-import { useEffect, useState } from "react";
+import React from "react";
 
 interface ResponseDetailProps {
-  RowKey: string;
   TriggerButton: React.ReactNode;
+  sheetData: DocumentIntake | null;
 }
 
-const ResponseDetail = ({ RowKey, TriggerButton }: ResponseDetailProps) => {
-  const [sheetData, setSheetData] = useState<any>({});
-
-  async function getSheetData() {
-    const header = {
-      "eContracts-ApiKey":
-        "4oTDTxvMgJjbGtZJdFAnwBCroe8uoVGvk+0fR3bHzeqs9KDPOJAzuzvXh9TSuiUvl7r2dhNhaNOcv598qie65A==",
-    };
-    try {
-      const response = await axios.get(
-        `https://api-otbt-econ-test.azurewebsites.net/api/accounts/3Xae5Udc/documentIngestionSummary?documentInTakePipelineId=${RowKey}`,
-        { headers: header }
-      );
-      setSheetData(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Failed to fetch sheet data:", error);
-    }
-  }
-
-  useEffect(() => {
-    if (RowKey) {
-      getSheetData();
-    }
-  }, [RowKey]);
-
+const ResponseDetail = ({ TriggerButton, sheetData }: ResponseDetailProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>{TriggerButton}</SheetTrigger>
@@ -64,18 +39,18 @@ const ResponseDetail = ({ RowKey, TriggerButton }: ResponseDetailProps) => {
           <p>Is OCR Done: {sheetData?.IsOCRed ? "Yes" : "No"}</p>
           <p>
             Size:{" "}
-            {sheetData?.Size ? bytesToMB(sheetData.Size).toFixed(2) : "N/A"} MB
+            {sheetData?.Size ? bytesToMB(sheetData?.Size).toFixed(2) : "N/A"} MB
           </p>
           <p className="flex items-center">
             Document Type:{" "}
             {sheetData?.Extension && (
-              <IconSelector icon={sheetData.Extension} />
+              <IconSelector icon={sheetData?.Extension} />
             )}
           </p>
           {sheetData?.DocumentUrl && (
             <Button className="bg-blue-600 h-9 text-xs hover:bg-blue-700">
               <a
-                href={sheetData.DocumentUrl}
+                href={sheetData?.DocumentUrl}
                 className="flex items-center space-x-2"
                 target="_blank"
                 rel="noopener noreferrer"

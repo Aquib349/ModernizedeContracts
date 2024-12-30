@@ -11,10 +11,13 @@ import { LiaFileContractSolid } from "react-icons/lia";
 import { BsCalendar2Month, BsUiChecks } from "react-icons/bs";
 import { CalendarDays, CalendarRange } from "lucide-react";
 
-
 export const contractSummerycolumns = [
   { header: "Category", key: "category" },
-  { header: "Details", key: "details", render: (details) => <div>{details}</div> },
+  {
+    header: "Details",
+    key: "details",
+    render: (details) => <div>{details}</div>,
+  },
 ];
 
 // Define table data
@@ -205,9 +208,7 @@ export const data4 = [
 ];
 
 export const NavItems = [
-  // { id: 1, name: "Tasks", icon: <AiOutlineBars /> },
   { id: 2, name: "Alerts", icon: <SlBell /> },
-  { id: 3, name: "Bookmarks", icon: <IoBookmarkOutline /> },
   { id: 4, name: "Help Documents", icon: <FaRegCircleQuestion /> },
   { id: 5, name: "Profile", icon: <FaRegUserCircle /> },
 ];

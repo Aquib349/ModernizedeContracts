@@ -24,7 +24,7 @@ function ContractUpdates() {
   return (
     <>
       <div className="contract-updates-component">
-        <div className="main bg-white p-4 rounded-md">
+        <div className="main bg-[#fafafa] p-4 rounded-md">
           <div className="flex justify-between">
             <div className="flex items-center space-x-2">
               <BellRing size={16} className="text-yellow-500" />

@@ -43,7 +43,7 @@ const BusinessAreaDashboard = ({
       <div className="contract-summary space-y-2 bg-white p-2 pt-0 rounded-md mt-2">
         <ToggleView
           heading={"AI Generated Business Area Summary"}
-          businessArea
+          businessArea={businessArea}
         />
         {/* <div className="text-sm"> */}
         <div className=" text-gray-500 ml-4">
@@ -79,7 +79,7 @@ const BusinessAreaDashboard = ({
         <ToggleButton
           title="Contract Repository OverView"
           componentKey="contractRepositoryOverview"
-          Allviews={true}
+          Allviews={[]}
           businessArea
         />
 
@@ -99,7 +99,7 @@ const BusinessAreaDashboard = ({
         <ToggleButton
           title="Key Activities & Alerts"
           componentKey="reviewInsights"
-          Allviews={true}
+          Allviews={[]}
           businessArea
         />
         <div className=" text-gray-500 ml-4 mt-8">

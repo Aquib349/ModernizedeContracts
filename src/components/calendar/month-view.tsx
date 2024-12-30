@@ -80,7 +80,7 @@ const MonthView: React.FC<CalendarProps> = ({
           return (
             <div
               key={date.toString()}
-              className="h-20 rounded cursor-pointer border border-gray-300 p-2 relative"
+              className="h-24 rounded cursor-pointer border border-gray-300 p-2 relative"
             >
               {isToday ? (
                 <span className="text-indigo-500 font-semibold">

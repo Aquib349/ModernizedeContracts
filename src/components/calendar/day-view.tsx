@@ -56,7 +56,7 @@ const DayView = ({
   return (
     <>
       <CalendarEvents EventData={events} deleteEvents={deleteEvents} />
-      <div className="mt-2 p-4 border rounded relative h-auto">
+      <div className="mt-4 p-4 border rounded relative h-auto">
         <h2 className="text-lg font-bold mb-4">
           {currentDate.format("dddd, MMMM D, YYYY")}
         </h2>

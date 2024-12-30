@@ -18,7 +18,7 @@ function Dashboard() {
   return (
     <div
       className={`transition-all duration-500 ease-in-out ${
-        isOpen ? "pt-[3.5rem] pl-[3.5rem]" : "pt-14 p-2"
+        isOpen ? "pl-[3.5rem]" : "pt-14 p-2"
       }`}
     >
       <div
@@ -28,15 +28,15 @@ function Dashboard() {
       >
         {/* Sidebar */}
 
-        <div
-          className={`h-full bg-white ${
+        {/* <div
+          className={`z-50 ${
             isHidden ? "col-span-1" : "w-3/4"
-          } relative`}
+          }`}
         >
           <SidebarProvider>
             <GenerativeSidebar />
           </SidebarProvider>
-        </div>
+        </div> */}
 
         {/* Generative AI response or main content */}
         <div

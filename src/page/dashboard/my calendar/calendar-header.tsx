@@ -13,7 +13,7 @@ const CalendarHeader: React.FC<CdHeaderProps> = ({ views, setView }) => {
     <>
       <header className="flex items-center justify-between">
         <div className="flex w-full gap-2">
-          <div className="flex items-center w-1/2 px-2 rounded bg-white/60">
+          <div className="flex items-center w-1/2 px-2 rounded bg-[#fafafa]">
             <img src={stars} alt="loading.." className="w-3" />
             <Input
               type="text"

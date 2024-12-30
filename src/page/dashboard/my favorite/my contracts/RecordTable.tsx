@@ -34,7 +34,7 @@ import {
 import { contractData, ContractRecords } from "@/constants/CustomData";
 import { Link } from "react-router-dom";
 
-export const columns: ColumnDef<ContractRecords>[] = [
+const columns: ColumnDef<ContractRecords>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -67,7 +67,7 @@ export const columns: ColumnDef<ContractRecords>[] = [
     ),
     cell: ({ row }) => (
       <div className="lowercase cursor-pointer">
-        <Link to="/contractSummary">{row.getValue("contract_name")}</Link>
+        <Link to="/contracts/contractSummary">{row.getValue("contract_name")}</Link>
       </div>
     ),
   },
@@ -157,35 +157,7 @@ export default function RecordTable() {
 
   return (
     <div className="w-full">
-      <div className="absolute top-3 right-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="h-9">
-              Hide Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="center">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize bg-white z-50"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div className="rounded-md border mt-6">
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -235,7 +207,7 @@ export default function RecordTable() {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end space-x-2 pt-2">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.

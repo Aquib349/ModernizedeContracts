@@ -5,7 +5,7 @@ function MyTask() {
   return (
     <>
       <div className="task-component">
-        <div className="main bg-white p-4 rounded-md">
+        <div className="main bg-[#fafafa] p-4 rounded-md">
           <div className="flex items-center space-x-2">
             <ListRestart size={16} className="text-blue-500" />
             <p className="font-semibold text-base">My Tasks</p>

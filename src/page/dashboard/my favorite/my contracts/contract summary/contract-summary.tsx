@@ -20,13 +20,13 @@ const ContractSummary: React.FC = () => {
 
   return (
     <>
-      <div className="contract-summary space-y-2">
-        <ToggleView heading={"AI Generated Contract Summary"} />
+      <div className="contract-summary space-y-2 w-[70%] mx-auto">
+        {/* <ToggleView heading={"AI Generated Contract Summary"} /> */}
 
         {/* list view summary */}
 
         <div className="text-sm">
-          <div className="bg-white p-4 rounded-md text-gray-500">
+          <div className="bg-gray-50 p-4 rounded-md text-gray-500">
             <p className="italic text-slate-500 text-xs flex items-center gap-1">
               <History size={16} className="cursor-pointer" />
               Time Since Last Update: 2 hours ago
@@ -49,7 +49,7 @@ const ContractSummary: React.FC = () => {
         </div>
 
         {/* Contract Life Cycle */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-gray-50 p-4 rounded-md">
           <ToggleButton
             title="Lifecycle Progress Bar"
             componentKey="contractLifeCycle"
@@ -63,7 +63,7 @@ const ContractSummary: React.FC = () => {
         </div>
 
         {/* Activity Plan */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-gray-50 p-4 rounded-md">
           <ToggleButton
             title="Activity Plan"
             componentKey="activityPlan"
@@ -77,7 +77,7 @@ const ContractSummary: React.FC = () => {
         </div>
 
         {/* Review Insights */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-gray-50 p-4 rounded-md">
           <ToggleButton
             title="Review Insights"
             componentKey="reviewInsights"
@@ -93,7 +93,7 @@ const ContractSummary: React.FC = () => {
         </div>
 
         {/* Contract Highlights */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-gray-50 p-4 rounded-md">
           <ToggleButton
             title="Contract Highlights"
             componentKey="contractHighlights"
@@ -103,7 +103,7 @@ const ContractSummary: React.FC = () => {
         </div>
 
         {/* Activity Timeline */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-gray-50 p-4 rounded-md">
           <ToggleButton
             title="Activity Timeline"
             componentKey="activityTimeline"
